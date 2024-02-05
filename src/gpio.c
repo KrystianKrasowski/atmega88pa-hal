@@ -1,4 +1,7 @@
+#ifndef __AVR_ATmega88PA__
 #define __AVR_ATmega88PA__
+#endif
+
 #include "gpio.h"
 #include <avr/io.h>
 
