@@ -2,7 +2,7 @@
 
 static uint8_t compute_ocrnx(const uint8_t duty_cycle)
 {
-	return (128 * duty_cycle) / 100;
+  return (128 * duty_cycle) / 100;
 }
 
 void hal_pwm0pc_init(void)
@@ -27,6 +27,9 @@ void hal_pwm0pc_run(const hal_pwm0pc_def_t *def,
     case HAL_PWM0PC_CHANNEL_NON_INVERTING:
       ctrl_reg_a |= (1 << COM0A1);
       ctrl_reg_a &= ~(1 << COM0A0);
+      break;
+    case HAL_PWM0PC_CHANNEL_INVERTING:
+      ctrl_reg_a |= (1 << COM0A1) | (1 << COM0A0);
       break;
   }
 
@@ -54,7 +57,8 @@ void hal_pwm0pc_run(const hal_pwm0pc_def_t *def,
 void hal_pwm0pc_stop(void)
 {
   uint8_t ctrl_reg_a = TCCR0A;
-  ctrl_reg_a &= ~((1 << COM0A1) | (1 << COM0A0) | (1 << COM0B1) | (1 << COM0B0));
+  ctrl_reg_a &=
+      ~((1 << COM0A1) | (1 << COM0A0) | (1 << COM0B1) | (1 << COM0B0));
   TCCR0A = ctrl_reg_a;
   TCCR0B = 0;
 }

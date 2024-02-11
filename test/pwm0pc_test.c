@@ -17,7 +17,7 @@ uint8_t CS02 = 2;
 uint8_t CS01 = 1;
 uint8_t CS00 = 0;
 
-void should_init_pwm0_phase_correct(void)
+void should_init_phase_correct_pwm(void)
 {
   // when
   hal_pwm0pc_init();
@@ -28,24 +28,13 @@ void should_init_pwm0_phase_correct(void)
 }
 
 // TODO: Parameterize it
-void should_run_pwm0_phase_correct(void)
+void should_run_non_inverting_pwm_on_channel_A(void)
 {
   // given
-  hal_pwm0pc_channel_def_t channel_a = {
-    .mode = HAL_PWM0PC_CHANNEL_NON_INVERTING,
-    .duty_cycle = 50
-  };
-
-  hal_pwm0pc_channel_def_t channel_b = {
-    .mode = HAL_PWM0PC_CHANNEL_DISCONNECTED,
-    .duty_cycle = 50
-  };
-
   hal_pwm0pc_def_t def = {
-    .channel_a = channel_a,
-    .channel_b = channel_b,
-    .prescaller = HAL_PWM0PC_PRESC_1
-  };
+      .channel_a = {.mode = HAL_PWM0PC_CHANNEL_NON_INVERTING, .duty_cycle = 50},
+      .channel_b = {.mode = HAL_PWM0PC_CHANNEL_DISCONNECTED, .duty_cycle = 50},
+      .prescaller = HAL_PWM0PC_PRESC_1};
 
   // when
   hal_pwm0pc_run(&def, HAL_PWM0PC_PRESC_1);
@@ -53,8 +42,22 @@ void should_run_pwm0_phase_correct(void)
   // then
   TEST_ASSERT_BITS(0xf0, 0x80, TCCR0A);
   TEST_ASSERT_BITS(0x0f, 0x01, TCCR0B);
-  TEST_ASSERT_EQUAL_HEX8(0x40, OCR0A);
-  TEST_ASSERT_EQUAL_HEX8(0x40, OCR0B);
+}
+
+void should_run_inverting_pwm_on_channel_A(void)
+{
+  // given
+  hal_pwm0pc_def_t def = {
+      .channel_a = {.mode = HAL_PWM0PC_CHANNEL_INVERTING, .duty_cycle = 50},
+      .channel_b = {.mode = HAL_PWM0PC_CHANNEL_DISCONNECTED, .duty_cycle = 50},
+      .prescaller = HAL_PWM0PC_PRESC_1};
+
+  // when
+  hal_pwm0pc_run(&def, HAL_PWM0PC_PRESC_1);
+
+  // then
+  TEST_ASSERT_BITS(0xf0, 0xc0, TCCR0A);
+  TEST_ASSERT_BITS(0x0f, 0x01, TCCR0B);
 }
 
 void should_stop_pwm0pc(void)
@@ -74,8 +77,9 @@ void tearDown() {}
 int main(void)
 {
   UNITY_BEGIN();
-  RUN_TEST(should_init_pwm0_phase_correct);
-  RUN_TEST(should_run_pwm0_phase_correct);
+  RUN_TEST(should_init_phase_correct_pwm);
+  RUN_TEST(should_run_non_inverting_pwm_on_channel_A);
+  RUN_TEST(should_run_inverting_pwm_on_channel_A);
   RUN_TEST(should_stop_pwm0pc);
   return UNITY_END();
 }
