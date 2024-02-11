@@ -1,5 +1,5 @@
-#ifndef _LIBAVRHAL
-#define _LIBAVRHAL
+#ifndef _LIBAVRHAL_GPIO
+#define _LIBAVRHAL_GPIO
 
 #include <avr/io.h>
 

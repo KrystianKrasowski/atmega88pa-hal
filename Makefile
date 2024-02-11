@@ -1,27 +1,27 @@
-PATH_SRC 			= src
-PATH_TEST 			= test
-PATH_TEST_INC 		= test/include
-PATH_BUILD 			= build
-PATH_RELEASE_BUILD 	= build/release
-PATH_RELEASE_OBJS 	= build/release/objs
-PATH_TEST_BIN 		= build/test/bin
-PATH_TEST_OBJS 		= build/test/objs
-PATH_TEST_RESULTS 	= build/test/results
-PATH_DIST 			= dist
+PATH_SRC			= src
+PATH_TEST			= test
+PATH_TEST_INC		= test/include
+PATH_BUILD			= build
+PATH_RELEASE_BUILD	= build/release
+PATH_RELEASE_OBJS	= build/release/objs
+PATH_TEST_BIN		= build/test/bin
+PATH_TEST_OBJS		= build/test/objs
+PATH_TEST_RESULTS	= build/test/results
+PATH_DIST			= dist
 
 SRCS = $(wildcard $(PATH_SRC)/*.c)
 OBJS = $(patsubst $(PATH_SRC)/%.c, $(PATH_RELEASE_OBJS)/%.o, $(SRCS))
 LIBS = $(patsubst $(PATH_SRC)/%.c, $(PATH_DIST)/libavrhal-%.a, $(SRCS))
 
 TEST_SRCS		= $(wildcard $(PATH_TEST)/*.c)
-TEST_RESULTS 	= $(patsubst $(PATH_TEST)/%_test.c, $(PATH_TEST_RESULTS)/%_test.txt, $(TEST_SRCS))
-TEST_PASSED 	= `grep -s PASS $(PATH_TEST_RESULTS)/*.txt`
-TEST_FAILED 	= `grep -s FAIL $(PATH_TEST_RESULTS)/*.txt`
-TEST_IGNORED 	= `grep -s IGNORE $(PATH_TEST_RESULTS)/*.txt`
+TEST_RESULTS	= $(patsubst $(PATH_TEST)/%_test.c, $(PATH_TEST_RESULTS)/%_test.txt, $(TEST_SRCS))
+TEST_PASSED		= `grep -s PASS $(PATH_TEST_RESULTS)/*.txt`
+TEST_FAILED		= `grep -s FAIL $(PATH_TEST_RESULTS)/*.txt`
+TEST_IGNORED	= `grep -s IGNORE $(PATH_TEST_RESULTS)/*.txt`
 
 # Release toolchain
-CC_RELEASE 		= avr-gcc
-AR 				= avr-ar
+CC_RELEASE		= avr-gcc
+AR				= avr-ar
 CFLAGS_RELEASE	= -mmcu=atmega88pa -Wall -Os
 
 # Test toolchain
