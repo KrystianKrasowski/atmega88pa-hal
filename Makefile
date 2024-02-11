@@ -1,37 +1,71 @@
-GCC_TARGET = atmega88pa
-AVRDUDE_TARGET = m88p
-SRC_DIR = src
-BUILD_DIR = build
-DIST_DIR = dist
-SRCS = $(wildcard $(SRC_DIR)/*.c)
-OBJS = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
+PATH_SRC 			= src
+PATH_TEST 			= test
+PATH_TEST_INC 		= test/include
+PATH_BUILD 			= build
+PATH_RELEASE_BUILD 	= build/release
+PATH_RELEASE_OBJS 	= build/release/objs
+PATH_TEST_BIN 		= build/test/bin
+PATH_TEST_OBJS 		= build/test/objs
+PATH_TEST_RESULTS 	= build/test/results
+PATH_DIST 			= dist
 
-all: prepare $(DIST_DIR)/main.hex
+SRCS = $(wildcard $(PATH_SRC)/*.c)
+OBJS = $(patsubst $(PATH_SRC)/%.c, $(PATH_RELEASE_OBJS)/%.o, $(SRCS))
+LIBS = $(patsubst $(PATH_SRC)/%.c, $(PATH_DIST)/libavrhal-%.a, $(SRCS))
 
-$(DIST_DIR)/main.hex: $(BUILD_DIR)/main.elf
-	avr-objcopy $< -O ihex ./atmega88pa-hal
+TEST_SRCS		= $(wildcard $(PATH_TEST)/*.c)
+TEST_RESULTS 	= $(patsubst $(PATH_TEST)/%_test.c, $(PATH_TEST_RESULTS)/%_test.txt, $(TEST_SRCS))
+TEST_PASSED 	= `grep -s PASS $(PATH_TEST_RESULTS)/*.txt`
+TEST_FAILED 	= `grep -s FAIL $(PATH_TEST_RESULTS)/*.txt`
+TEST_IGNORED 	= `grep -s IGNORE $(PATH_TEST_RESULTS)/*.txt`
 
-$(BUILD_DIR)/main.elf: $(OBJS)
-	avr-gcc -mmcu=$(GCC_TARGET) $^ -o ./atmega88pa-hal
+# Release toolchain
+CC_RELEASE 		= avr-gcc
+AR 				= avr-ar
+CFLAGS_RELEASE	= -mmcu=atmega88pa -Wall -Os
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	avr-gcc -c -mmcu=$(GCC_TARGET) $< -o ./atmega88pa-hal
+# Test toolchain
+CC_TEST			= gcc
+CFLAGS_TEST		= -I$(PATH_TEST_INC)
+CC_TEST_LIBS	= -lunity
 
-flash: $(DIST_DIR)/main.hex
-	avrdude -c usbasp -p $(AVRDUDE_TARGET) -U flash:w:"$<":a
+all: $(LIBS)
 
-size: $(BUILD_DIR)/main.elf
-	avr-size --format=avr --mcu=$(GCC_TARGET) $<
+$(PATH_DIST)/libavrhal-%.a: $(PATH_RELEASE_OBJS)/%.o
+	@mkdir -p $(PATH_DIST)
+	@$(AR) rcs $@ $<
 
-prepare: $(BUILD_DIR) $(DIST_DIR)
+$(PATH_RELEASE_OBJS)/%.o: $(PATH_SRC)/%.c
+	@mkdir -p $(PATH_RELEASE_OBJS)
+	@$(CC_RELEASE) $(CFLAGS_RELEASE) -c $< -o $@
 
-$(BUILD_DIR):
-	mkdir -p ./atmega88pa-hal
+test: $(TEST_RESULTS)
+	@printf "=======================\nIGNORES:\n======================="
+	@printf "\n$(TEST_IGNORED)\n"
+	@printf "=======================\nFAILURES:\n======================="
+	@printf "\n$(TEST_FAILED)\n"
+	@printf "=======================\nPASSED:\n======================="
+	@printf "\n$(TEST_PASSED)\n"
+	@printf "\nDONE\n"
 
-$(DIST_DIR):
-	mkdir -p ./atmega88pa-hal
+$(PATH_TEST_RESULTS)/%.txt: $(PATH_TEST_BIN)/%.out
+	@mkdir -p $(@D)
+	-./$< > $@ 2>&1
+
+$(PATH_TEST_BIN)/%_test.out: $(PATH_TEST_OBJS)/%_test.o $(PATH_TEST_OBJS)/%.o
+	@mkdir -p $(@D)
+	$(CC_TEST) $^ -o $@ $(CC_TEST_LIBS)
+
+$(PATH_TEST_OBJS)/%.o:: $(PATH_TEST)/%.c
+	@mkdir -p $(@D)
+	$(CC_TEST) $(CFLAGS_TEST) -c $< -o $@
+
+$(PATH_TEST_OBJS)/%.o:: $(PATH_SRC)/%.c
+	@mkdir -p $(@D)
+	$(CC_TEST) $(CFLAGS_TEST) -c $< -o $@
 
 clean:
-	rm -rf $(BUILD_DIR)
-	rm -rf $(DIST_DIR)
+	@rm -rf $(PATH_BUILD) $(PATH_DIST)
 
+.PHONY: all test clean
+.PRECIOUS: $(PATH_TEST_BIN)/%.out $(PATH_TEST_RESULTS)/%.txt
