@@ -60,7 +60,7 @@ void should_run_inverting_pwm_on_channel_A(void)
   TEST_ASSERT_BITS(0x0f, 0x01, TCCR0B);
 }
 
-void should_stop_pwm0pc(void)
+void should_stop_pwm(void)
 {
   // when
   hal_pwm0pc_stop();
@@ -80,6 +80,6 @@ int main(void)
   RUN_TEST(should_init_phase_correct_pwm);
   RUN_TEST(should_run_non_inverting_pwm_on_channel_A);
   RUN_TEST(should_run_inverting_pwm_on_channel_A);
-  RUN_TEST(should_stop_pwm0pc);
+  RUN_TEST(should_stop_pwm);
   return UNITY_END();
 }
