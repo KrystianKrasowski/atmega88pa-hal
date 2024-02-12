@@ -35,8 +35,7 @@ typedef struct
 } hal_pwm0pc_def_t;
 
 void hal_pwm0pc_init(void);
-void hal_pwm0pc_run(const hal_pwm0pc_def_t *def,
-                    const hal_pwm0pc_prescaller_t presc);
+void hal_pwm0pc_run(const hal_pwm0pc_def_t *def);
 void hal_pwm0pc_stop(void);
 
 #endif

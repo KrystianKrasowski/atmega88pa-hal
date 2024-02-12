@@ -19,7 +19,7 @@ void should_define_gpio_as_output(void)
            uint8_t pin_no,
            uint8_t * avr_ddr,
            uint8_t expected_mask)
-  {
+   {
     // given
     *avr_ddr = 0;
     hal_gpio_def_t def = {.dir = HAL_GPIO_OUTPUT, .reg = reg, .pin = pin_no};
