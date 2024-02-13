@@ -18,7 +18,7 @@ TEST_RESULTS	= $(patsubst $(PATH_TEST)/%_test.c, $(PATH_TEST_RESULTS)/%_test.txt
 # Release toolchain
 CC_RELEASE		= avr-gcc
 AR				= avr-ar
-CFLAGS_RELEASE	= -mmcu=atmega88pa -Wall -Os --param=min-pagesize=0 -I./include
+CFLAGS_RELEASE	= -mmcu=atmega88pa -Wall -Os -fshort-enums --param=min-pagesize=0 -I./include
 
 # Test toolchain
 CC_TEST			= gcc

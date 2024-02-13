@@ -24,7 +24,7 @@ void should_define_gpio_as_output(hal_gpio_reg_t reg,
   hal_gpio_def_t def = {.dir = HAL_GPIO_OUTPUT, .reg = reg, .pin = pin_no};
 
   // when
-  hal_gpio_init(def);
+  hal_gpio_init(&def);
 
   // then
   TEST_ASSERT_EQUAL_HEX8(expected_mask, *avr_ddr);
@@ -39,7 +39,7 @@ void should_define_gpio_as_input(hal_gpio_reg_t reg,
   hal_gpio_def_t def = {.dir = HAL_GPIO_INPUT, .reg = reg, .pin = pin_no};
 
   // when
-  hal_gpio_init(def);
+  hal_gpio_init(&def);
 
   // then
   TEST_ASSERT_EQUAL_HEX8(expected_mask, *avr_ddr);
@@ -55,7 +55,7 @@ void should_toggle_gpio(hal_gpio_reg_t reg,
   hal_gpio_def_t def = {.dir = HAL_GPIO_OUTPUT, .reg = reg, .pin = pin_no};
 
   // when
-  hal_gpio_toggle(def);
+  hal_gpio_toggle(&def);
 
   // then
   TEST_ASSERT_EQUAL_HEX8(expected_mask, *avr_port);
@@ -71,9 +71,9 @@ void should_write_gpio(hal_gpio_reg_t reg,
   hal_gpio_def_t def = {.dir = HAL_GPIO_OUTPUT, .reg = reg, .pin = pin_no};
 
   // when
-  hal_gpio_write(def, HAL_GPIO_HIGH);
+  hal_gpio_write(&def, HAL_GPIO_HIGH);
   uint8_t actual_when_high = *avr_port;
-  hal_gpio_write(def, HAL_GPIO_LOW);
+  hal_gpio_write(&def, HAL_GPIO_LOW);
   uint8_t actual_when_low = *avr_port;
 
   // then
@@ -91,7 +91,7 @@ void should_read_gpio(hal_gpio_reg_t reg,
   hal_gpio_def_t def = {.dir = HAL_GPIO_INPUT, .reg = reg, .pin = pin_no};
 
   // when
-  hal_gpio_state_t actual = hal_gpio_read(def);
+  hal_gpio_state_t actual = hal_gpio_read(&def);
 
   // then
   TEST_ASSERT_EQUAL(expected_state, actual);
