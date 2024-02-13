@@ -45,7 +45,7 @@ void should_init_phase_correct_pwm(void)
   TEST_ASSERT_BITS(0x08, 0, TCCR0B);
 }
 
-void should_run_pwm_with_mode(hal_t0pwm_channel_mode_t channel_a_mode,
+void should_run_pwm_with_channel_mode(hal_t0pwm_channel_mode_t channel_a_mode,
                               hal_t0pwm_channel_mode_t channel_b_mode,
                               uint8_t expected_tccr0a)
 {
@@ -100,34 +100,35 @@ void tearDown() {}
 int main(void)
 {
   UNITY_BEGIN();
+  RUN_TEST(should_init_fast_pwm);
   RUN_TEST(should_init_phase_correct_pwm);
-  RUN_TEST(should_run_pwm_with_mode,
+  RUN_TEST(should_run_pwm_with_channel_mode,
            HAL_T0PWM_CHANNEL_DISCONNECTED,
            HAL_T0PWM_CHANNEL_DISCONNECTED,
            0x00);
-  RUN_TEST(should_run_pwm_with_mode,
+  RUN_TEST(should_run_pwm_with_channel_mode,
            HAL_T0PWM_CHANNEL_TOGGLE_ON_COMPARE,
            HAL_T0PWM_CHANNEL_DISCONNECTED,
            0x40);
-  RUN_TEST(should_run_pwm_with_mode,
+  RUN_TEST(should_run_pwm_with_channel_mode,
            HAL_T0PWM_CHANNEL_NON_INVERTING,
            HAL_T0PWM_CHANNEL_DISCONNECTED,
            0x80);
-  RUN_TEST(should_run_pwm_with_mode,
+  RUN_TEST(should_run_pwm_with_channel_mode,
            HAL_T0PWM_CHANNEL_INVERTING,
            HAL_T0PWM_CHANNEL_DISCONNECTED,
            0xc0);
   // According to atmega88pa datasheet, channel B has no compare match mode,
   // thus this HAL use case falls back to disconnected mode on channel B
-  RUN_TEST(should_run_pwm_with_mode,
+  RUN_TEST(should_run_pwm_with_channel_mode,
            HAL_T0PWM_CHANNEL_DISCONNECTED,
            HAL_T0PWM_CHANNEL_TOGGLE_ON_COMPARE,
            0x00);
-  RUN_TEST(should_run_pwm_with_mode,
+  RUN_TEST(should_run_pwm_with_channel_mode,
            HAL_T0PWM_CHANNEL_DISCONNECTED,
            HAL_T0PWM_CHANNEL_NON_INVERTING,
            0x20);
-  RUN_TEST(should_run_pwm_with_mode,
+  RUN_TEST(should_run_pwm_with_channel_mode,
            HAL_T0PWM_CHANNEL_DISCONNECTED,
            HAL_T0PWM_CHANNEL_INVERTING,
            0x30);
