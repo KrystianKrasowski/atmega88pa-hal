@@ -1,6 +1,5 @@
 PATH_SRC			= src
 PATH_TEST			= test
-PATH_TEST_INC		= test/include
 PATH_BUILD			= build
 PATH_RELEASE_BUILD	= build/release
 PATH_RELEASE_OBJS	= build/release/objs
@@ -19,11 +18,11 @@ TEST_RESULTS	= $(patsubst $(PATH_TEST)/%_test.c, $(PATH_TEST_RESULTS)/%_test.txt
 # Release toolchain
 CC_RELEASE		= avr-gcc
 AR				= avr-ar
-CFLAGS_RELEASE	= -mmcu=atmega88pa -Wall -Os --param=min-pagesize=0
+CFLAGS_RELEASE	= -mmcu=atmega88pa -Wall -Os --param=min-pagesize=0 -I./include
 
 # Test toolchain
 CC_TEST			= gcc
-CFLAGS_TEST		= -I$(PATH_TEST_INC)
+CFLAGS_TEST		= -I./test/include -I./include
 CC_TEST_LIBS	= -lunity
 
 # Test Summary
