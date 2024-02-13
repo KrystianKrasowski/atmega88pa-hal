@@ -2,11 +2,12 @@
 
 static uint8_t compute_ocrnx(uint8_t duty_cycle)
 {
-  if (duty_cycle > 100) {
+  if (duty_cycle > 100)
+  {
     duty_cycle = 100;
   }
 
-  return (128 * duty_cycle) / 100;
+  return (255 * duty_cycle) / 100;
 }
 
 static void apply_com0nx(hal_t0pwm_channel_mode_t channel_mode,
@@ -71,11 +72,20 @@ static void apply_prescaler(hal_t0pwm_prescaller_t mode)
   }
 }
 
-void hal_t0pwm_init(void)
+void hal_t0pwm_init(const hal_t0pwm_def_t *def)
 {
-  TCCR0A |= (1 << WGM00);
-  TCCR0A &= ~(1 << WGM01);
-  TCCR0B &= ~(1 << WGM02);
+  switch (def->mode)
+  {
+    case HAL_T0PWM_MODE_PHASE_CORRECT:
+      TCCR0A |= (1 << WGM00);
+      TCCR0A &= ~(1 << WGM01);
+      TCCR0B &= ~(1 << WGM02);
+      break;
+    case HAL_T0PWM_MODE_FAST:
+    default:
+      TCCR0A |= (1 << WGM01) | (1 << WGM00);
+      TCCR0B &= ~(1 << WGM02);
+  }
 }
 
 void hal_t0pwm_run(const hal_t0pwm_def_t *def)
