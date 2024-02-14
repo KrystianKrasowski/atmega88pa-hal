@@ -2,3 +2,4 @@
 .fleet
 build
 dist
+*.geany
