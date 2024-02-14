@@ -1,5 +1,5 @@
-#ifndef _LIBAVRHAL
-#define _LIBAVRHAL
+#ifndef _LIBAVRHAL_GPIO
+#define _LIBAVRHAL_GPIO
 
 #include <avr/io.h>
 
@@ -30,9 +30,9 @@ typedef enum
   HAL_GPIO_LOW
 } hal_gpio_state_t;
 
-void hal_gpio_init(hal_gpio_def_t def);
-void hal_gpio_toggle(hal_gpio_def_t def);
-void hal_gpio_write(hal_gpio_def_t def, hal_gpio_state_t state);
-hal_gpio_state_t hal_gpio_read(hal_gpio_def_t def);
+void hal_gpio_init(const hal_gpio_def_t *def);
+void hal_gpio_toggle(const hal_gpio_def_t *def);
+void hal_gpio_write(const hal_gpio_def_t *def, const hal_gpio_state_t state);
+hal_gpio_state_t hal_gpio_read(const hal_gpio_def_t *def);
 
 #endif
