@@ -33,4 +33,21 @@ extern uint8_t CS02;
 extern uint8_t CS01;
 extern uint8_t CS00;
 
+extern uint8_t TCCR1A;
+extern uint8_t TCCR1B;
+extern uint8_t TCCR1C;
+extern uint8_t TIMSK1;
+extern uint8_t CS12;
+extern uint8_t CS11;
+extern uint8_t CS10;
+extern uint16_t ICR1;
+extern uint8_t TOIE1;
+extern uint8_t OCIE1A;
+extern uint8_t OCIE1B;
+extern uint8_t ICIE1;
+
+extern uint8_t TIMER1_CAPT_vect;
+
+extern void sei(void);
+
 #endif
