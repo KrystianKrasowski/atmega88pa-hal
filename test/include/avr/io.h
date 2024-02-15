@@ -3,6 +3,8 @@
 #ifndef _AVR_IO_MOCK
 #define _AVR_IO_MOCK
 
+#define TIMER1_CAPT_vect __TIMER1_CAPT_vect
+
 extern uint8_t DDRB;
 extern uint8_t DDRC;
 extern uint8_t DDRD;
@@ -46,8 +48,6 @@ extern uint8_t OCIE1A;
 extern uint8_t OCIE1B;
 extern uint8_t ICIE1;
 
-extern uint8_t TIMER1_CAPT_vect;
-
-extern void sei(void);
+void sei(void);
 
 #endif
