@@ -55,7 +55,7 @@ test: $(TEST_RESULTS)
 
 $(PATH_TEST_RESULTS)/%.txt: $(PATH_TEST_BIN)/%.out
 	@mkdir -p $(@D)
-	-./$< > $@ 2>&1
+	@-./$< > $@ 2>&1
 
 $(PATH_TEST_BIN)/%_test.out: $(PATH_TEST_OBJS)/%_test.o $(PATH_TEST_OBJS)/%.o
 	@mkdir -p $(@D)
