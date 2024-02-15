@@ -1,3 +1,4 @@
+PATH_INC			= include
 PATH_SRC			= src
 PATH_TEST			= test
 PATH_BUILD			= build
@@ -8,6 +9,7 @@ PATH_TEST_OBJS		= build/test/objs
 PATH_TEST_RESULTS	= build/test/results
 PATH_DIST			= dist
 
+INCS = $(wildcard $(PATH_INC)/*.h)
 SRCS = $(wildcard $(PATH_SRC)/*.c)
 OBJS = $(patsubst $(PATH_SRC)/%.c, $(PATH_RELEASE_OBJS)/%.o, $(SRCS))
 LIBS = $(patsubst $(PATH_SRC)/%.c, $(PATH_DIST)/libavrhal-%.a, $(SRCS))
@@ -72,5 +74,10 @@ $(PATH_TEST_OBJS)/%.o:: $(PATH_SRC)/%.c
 clean:
 	@rm -rf $(PATH_BUILD) $(PATH_DIST)
 
-.PHONY: all test clean
+install: $(LIBS)
+	@mkdir -p /usr/local/include/avrhal
+	@cp $(INCS) /usr/local/include/avrhal
+	@cp $(LIBS) /usr/local/lib
+
+.PHONY: all test clean install
 .PRECIOUS: $(PATH_TEST_BIN)/%.out $(PATH_TEST_RESULTS)/%.txt
