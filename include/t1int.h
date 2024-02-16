@@ -16,5 +16,6 @@ typedef struct
 
 void hal_t1int_configure(const hal_t1int_cfg_t *cfg);
 __attribute__((weak)) void hal_t1int_on_input_capture(const uint16_t value);
+__attribute__((weak)) void hal_t1int_on_timer_overflow(void);
 
 #endif
