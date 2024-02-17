@@ -5,6 +5,7 @@
 uint8_t TCCR1A = 0;
 uint8_t TCCR1B = 0;
 uint8_t TCCR1C = 0;
+uint16_t TCNT1 = 0;
 uint8_t CS12 = 2;
 uint8_t CS11 = 1;
 uint8_t CS10 = 0;

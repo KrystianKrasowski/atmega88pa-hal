@@ -1,7 +1,7 @@
 #ifndef _LIBAVRHAL_T1NRM
 #define _LIBAVRHAL_T1NRM
 
-#include <avr/io.h>
+#include <stdint.h>
 
 typedef enum
 {
@@ -14,6 +14,7 @@ typedef enum
 } hal_t1nrm_prescaller_t;
 
 void hal_t1nrm_run(hal_t1nrm_prescaller_t presc);
+void hal_t1nrm_set(uint16_t value);
 void hal_t1nrm_stop(void);
 
 #endif

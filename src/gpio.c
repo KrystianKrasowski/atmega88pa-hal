@@ -1,3 +1,4 @@
+#include <avr/io.h>
 #include "gpio.h"
 
 volatile uint8_t *const DDRx[] = {&DDRB, &DDRC, &DDRD};

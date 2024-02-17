@@ -1,7 +1,7 @@
 #ifndef _LIBAVRHAL_GPIO
 #define _LIBAVRHAL_GPIO
 
-#include <avr/io.h>
+#include <stdint.h>
 
 typedef enum
 {
@@ -19,7 +19,7 @@ typedef enum
 
 typedef struct
 {
-  uint8_t reg;
+  hal_gpio_reg_t reg;
   hal_gpio_dir_t dir;
   uint8_t pin;
 } hal_gpio_def_t;

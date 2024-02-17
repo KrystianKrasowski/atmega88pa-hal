@@ -1,3 +1,4 @@
+#include <avr/io.h>
 #include "t0pwm.h"
 
 static uint8_t compute_ocrnx(uint8_t duty_cycle)

@@ -1,7 +1,7 @@
 #ifndef _LIBAVRHAL_T0PWM
 #define _LIBAVRHAL_T0PWM
 
-#include <avr/io.h>
+#include <stdint.h>
 
 typedef enum
 {

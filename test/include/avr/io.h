@@ -38,6 +38,7 @@ extern uint8_t CS00;
 extern uint8_t TCCR1A;
 extern uint8_t TCCR1B;
 extern uint8_t TCCR1C;
+extern uint16_t TCNT1;
 extern uint8_t TIMSK1;
 extern uint8_t CS12;
 extern uint8_t CS11;

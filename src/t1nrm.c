@@ -1,3 +1,4 @@
+#include <avr/io.h>
 #include "t1nrm.h"
 
 // TODO: Noise canceller for input capture
@@ -31,6 +32,11 @@ void hal_t1nrm_run(hal_t1nrm_prescaller_t presc)
     default:
       hal_t1nrm_stop();
   }
+}
+
+void hal_t1nrm_set(uint16_t value)
+{
+  TCNT1 = value;
 }
 
 void hal_t1nrm_stop(void)

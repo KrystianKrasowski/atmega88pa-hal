@@ -1,8 +1,7 @@
 #ifndef _LIBAVRHAL_T1INT
 #define _LIBAVRHAL_T1INT
 
-#include <avr/interrupt.h>
-#include <avr/io.h>
+#include <stdint.h>
 
 typedef struct
 {

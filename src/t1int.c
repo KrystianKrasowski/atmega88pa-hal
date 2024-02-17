@@ -1,3 +1,5 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
 #include "t1int.h"
 
 void hal_t1int_configure(const hal_t1int_cfg_t *cfg)
