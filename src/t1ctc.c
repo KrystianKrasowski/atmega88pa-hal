@@ -5,6 +5,7 @@ void hal_t1ctc_init(const hal_t1ctc_def_t *def)
 {
   TCCR1A = 0;
   TCCR1B |= (1 << WGM12);
+  OCR1A = def->resolution;
 }
 
 void hal_t1ctc_run(const hal_t1ctc_def_t *def)
