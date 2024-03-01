@@ -22,7 +22,7 @@ hal_t0pwm_def_t pwm = {
       .mode = HAL_T0PWM_MODE_FAST,
       .channel_a = {.mode = HAL_T0PWM_CHANNEL_NON_INVERTING, .duty_cycle = 50},
       .channel_b = {.mode = HAL_T0PWM_CHANNEL_DISCONNECTED, .duty_cycle = 0},
-      .prescaller = HAL_T0PWM_PRESC_1};
+      .prescaller = HAL_TIMER_PRESCALLER_1};
 
 void should_init_fast_pwm(void)
 {
@@ -73,7 +73,7 @@ void should_run_pwm_with_duty_cycle(uint8_t channel_a_dc,
   TEST_ASSERT_EQUAL_HEX(ocr0b, OCR0B);
 }
 
-void should_run_pwm_with_prescaler(hal_t0pwm_prescaller_t presc, uint8_t tccr0b)
+void should_run_pwm_with_prescaler(hal_timer_prescaller_t presc, uint8_t tccr0b)
 {
   // when
   pwm.prescaller = presc;
@@ -139,11 +139,11 @@ int main(void)
   RUN_TEST(should_run_pwm_with_duty_cycle, 101, 101, 0xff, 0xff);
   // cannot pass less than 0 as duty cycle var is of unsigned char type
   RUN_TEST(should_run_pwm_with_duty_cycle, -5, -5, 0xff, 0xff);
-  RUN_TEST(should_run_pwm_with_prescaler, HAL_T0PWM_PRESC_1, 0x01);
-  RUN_TEST(should_run_pwm_with_prescaler, HAL_T0PWM_PRESC_8, 0x02);
-  RUN_TEST(should_run_pwm_with_prescaler, HAL_T0PWM_PRESC_64, 0x03);
-  RUN_TEST(should_run_pwm_with_prescaler, HAL_T0PWM_PRESC_256, 0x04);
-  RUN_TEST(should_run_pwm_with_prescaler, HAL_T0PWM_PRESC_1024, 0x05);
+  RUN_TEST(should_run_pwm_with_prescaler, HAL_TIMER_PRESCALLER_1, 0x01);
+  RUN_TEST(should_run_pwm_with_prescaler, HAL_TIMER_PRESCALLER_8, 0x02);
+  RUN_TEST(should_run_pwm_with_prescaler, HAL_TIMER_PRESCALLER_64, 0x03);
+  RUN_TEST(should_run_pwm_with_prescaler, HAL_TIMER_PRESCALLER_256, 0x04);
+  RUN_TEST(should_run_pwm_with_prescaler, HAL_TIMER_PRESCALLER_1024, 0x05);
   RUN_TEST(should_run_pwm_with_prescaler, -1, 0x00);
   RUN_TEST(should_stop_pwm);
   return UNITY_END();

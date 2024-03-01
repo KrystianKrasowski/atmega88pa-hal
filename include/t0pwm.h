@@ -1,6 +1,7 @@
 #ifndef _LIBAVRHAL_T0PWM
 #define _LIBAVRHAL_T0PWM
 
+#include "std.h"
 #include <stdint.h>
 
 typedef enum
@@ -23,22 +24,12 @@ typedef struct
   uint8_t duty_cycle;
 } hal_t0pwm_channel_def_t;
 
-typedef enum
-{
-  HAL_T0PWM_PRESC_NONE,
-  HAL_T0PWM_PRESC_1,
-  HAL_T0PWM_PRESC_8,
-  HAL_T0PWM_PRESC_64,
-  HAL_T0PWM_PRESC_256,
-  HAL_T0PWM_PRESC_1024,
-} hal_t0pwm_prescaller_t;
-
 typedef struct
 {
   hal_t0pwm_mode_t mode;
   hal_t0pwm_channel_def_t channel_a;
   hal_t0pwm_channel_def_t channel_b;
-  hal_t0pwm_prescaller_t prescaller;
+  hal_timer_prescaller_t prescaller;
 } hal_t0pwm_def_t;
 
 void hal_t0pwm_init(const hal_t0pwm_def_t *def);
