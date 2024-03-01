@@ -10,7 +10,7 @@ uint8_t CS12 = 2;
 uint8_t CS11 = 1;
 uint8_t CS10 = 0;
 
-void should_run_with_prescaler(hal_t1nrm_prescaller_t presc,
+void should_run_with_prescaler(hal_timer_prescaller_t presc,
                                uint8_t expected_bits)
 {
   // when
@@ -36,12 +36,12 @@ void tearDown() {}
 int main(void)
 {
   UNITY_BEGIN();
-  RUN_TEST(should_run_with_prescaler, HAL_T1NRM_PRESC_1, 0x01);
-  RUN_TEST(should_run_with_prescaler, HAL_T1NRM_PRESC_8, 0x02);
-  RUN_TEST(should_run_with_prescaler, HAL_T1NRM_PRESC_64, 0x03);
-  RUN_TEST(should_run_with_prescaler, HAL_T1NRM_PRESC_256, 0x04);
-  RUN_TEST(should_run_with_prescaler, HAL_T1NRM_PRESC_1024, 0x05);
-  RUN_TEST(should_run_with_prescaler, HAL_T1NRM_PRESC_NONE, 0x00);
+  RUN_TEST(should_run_with_prescaler, HAL_TIMER_PRESCALLER_1, 0x01);
+  RUN_TEST(should_run_with_prescaler, HAL_TIMER_PRESCALLER_8, 0x02);
+  RUN_TEST(should_run_with_prescaler, HAL_TIMER_PRESCALLER_64, 0x03);
+  RUN_TEST(should_run_with_prescaler, HAL_TIMER_PRESCALLER_256, 0x04);
+  RUN_TEST(should_run_with_prescaler, HAL_TIMER_PRESCALLER_1024, 0x05);
+  RUN_TEST(should_run_with_prescaler, HAL_TIMER_PRESCALLER_NONE, 0x00);
   RUN_TEST(should_stop);
   return UNITY_END();
 }

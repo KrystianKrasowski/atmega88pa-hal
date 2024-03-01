@@ -44,27 +44,27 @@ static void apply_com0nx(hal_t0pwm_channel_mode_t channel_mode,
   }
 }
 
-static void apply_prescaler(hal_t0pwm_prescaller_t mode)
+static void apply_prescaler(hal_timer_prescaller_t mode)
 {
   switch (mode)
   {
-    case HAL_T0PWM_PRESC_1:
+    case HAL_TIMER_PRESCALLER_1:
       TCCR0B |= (1 << CS00);
       TCCR0B &= ~((1 << CS02) | (1 << CS01));
       break;
-    case HAL_T0PWM_PRESC_8:
+    case HAL_TIMER_PRESCALLER_8:
       TCCR0B |= (1 << CS01);
       TCCR0B &= ~((1 << CS02) | (1 << CS00));
       break;
-    case HAL_T0PWM_PRESC_64:
+    case HAL_TIMER_PRESCALLER_64:
       TCCR0B |= (1 << CS01) | (1 << CS00);
       TCCR0B &= ~(1 << CS02);
       break;
-    case HAL_T0PWM_PRESC_256:
+    case HAL_TIMER_PRESCALLER_256:
       TCCR0B |= (1 << CS02);
       TCCR0B &= ~((1 << CS01) | (1 << CS00));
       break;
-    case HAL_T0PWM_PRESC_1024:
+    case HAL_TIMER_PRESCALLER_1024:
       TCCR0B |= (1 << CS02) | (1 << CS00);
       TCCR0B &= ~(1 << CS01);
       break;
