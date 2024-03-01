@@ -7,6 +7,7 @@
 typedef struct
 {
   hal_timer_prescaller_t prescaller;
+  uint16_t resolution;
 } hal_t1ctc_def_t;
 
 void hal_t1ctc_init(const hal_t1ctc_def_t *def);

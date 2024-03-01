@@ -55,6 +55,7 @@ extern uint8_t TOIE1;
 extern uint8_t OCIE1A;
 extern uint8_t OCIE1B;
 extern uint8_t ICIE1;
+extern uint16_t OCR1A;
 
 void sei(void);
 
