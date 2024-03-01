@@ -37,7 +37,14 @@ extern uint8_t CS01;
 extern uint8_t CS00;
 
 extern uint8_t TCCR1A;
+extern uint8_t WGM10;
+extern uint8_t WGM11;
+extern uint8_t COM1B0;
+extern uint8_t COM1B1;
+extern uint8_t COM1A0;
+extern uint8_t COM1A1;
 extern uint8_t TCCR1B;
+extern uint8_t WGM12;
 extern uint8_t TCCR1C;
 extern uint16_t TCNT1;
 extern uint8_t TIMSK1;
