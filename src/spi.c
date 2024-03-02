@@ -80,6 +80,6 @@ uint8_t hal_spi_master_transmit_receive(const uint8_t chr)
 
 void hal_spi_master_transmit(const uint8_t chr) { SPDR = chr; }
 
-void hal_spi_on_transfer_complete(const uint8_t chr) {}
+__attribute__((weak)) void hal_spi_on_transfer_complete(const uint8_t chr) {}
 
 ISR(SPI_STC_vect) { hal_spi_on_transfer_complete(SPDR); }
