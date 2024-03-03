@@ -57,6 +57,7 @@ extern uint8_t OCIE1A;
 extern uint8_t OCIE1B;
 extern uint8_t ICIE1;
 extern uint16_t OCR1A;
+extern uint16_t OCR1B;
 
 extern uint8_t SPCR;
 extern uint8_t SPIE;

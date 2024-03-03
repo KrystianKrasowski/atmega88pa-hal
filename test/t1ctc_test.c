@@ -15,6 +15,7 @@ uint8_t CS11 = 1;
 uint8_t CS12 = 2;
 
 uint16_t OCR1A = 0;
+uint16_t OCR1B = 0;
 
 hal_t1ctc_def_t t1ctc = {.prescaller = HAL_TIMER_PRESCALLER_1};
 
@@ -45,7 +46,19 @@ void should_init_timer1_ctc_mode_resolution(uint16_t resolution)
   hal_t1ctc_init(&t1ctc);
 
   // then
-  TEST_ASSERT_BITS(0xff, resolution, OCR1A);
+  TEST_ASSERT_EQUAL_HEX16(resolution, OCR1A);
+}
+
+void should_init_timer1_ctc_mode_channel_b(uint16_t ocr1b)
+{
+  // given
+  t1ctc.output_compare_b = ocr1b;
+
+  // when
+  hal_t1ctc_init(&t1ctc);
+
+  // then
+  TEST_ASSERT_EQUAL_HEX16(ocr1b, OCR1B);
 }
 
 void should_run_timer1_ctc_mode(hal_timer_prescaller_t prescaller, uint8_t tccr1b)
@@ -69,6 +82,11 @@ int main(void)
   RUN_TEST(should_init_timer1_ctc_mode_resolution, 0x03);
   RUN_TEST(should_init_timer1_ctc_mode_resolution, 0x04);
   RUN_TEST(should_init_timer1_ctc_mode_resolution, 0x05);
+  RUN_TEST(should_init_timer1_ctc_mode_channel_b, 0x01);
+  RUN_TEST(should_init_timer1_ctc_mode_channel_b, 0x02);
+  RUN_TEST(should_init_timer1_ctc_mode_channel_b, 0x03);
+  RUN_TEST(should_init_timer1_ctc_mode_channel_b, 0x04);
+  RUN_TEST(should_init_timer1_ctc_mode_channel_b, 0x05);
   RUN_TEST(should_run_timer1_ctc_mode, HAL_TIMER_PRESCALLER_1, BIT(CS10));
   RUN_TEST(should_run_timer1_ctc_mode, HAL_TIMER_PRESCALLER_8, BIT(CS11));
   RUN_TEST(should_run_timer1_ctc_mode, HAL_TIMER_PRESCALLER_64, BIT(CS11) | BIT(CS10));
