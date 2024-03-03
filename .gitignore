@@ -3,7 +3,6 @@
 build
 dist
 *.geany
-
 # -*- mode: gitignore; -*-
 *~
 \#*\#

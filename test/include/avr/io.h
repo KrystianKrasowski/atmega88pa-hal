@@ -4,6 +4,7 @@
 #define _AVR_IO_MOCK
 
 #define TIMER1_CAPT_vect __TIMER1_CAPT_vect
+#define SPI_STC_vect __SPI_STC_vect
 
 extern uint8_t DDRB;
 extern uint8_t DDRC;
@@ -56,6 +57,28 @@ extern uint8_t OCIE1A;
 extern uint8_t OCIE1B;
 extern uint8_t ICIE1;
 extern uint16_t OCR1A;
+
+extern uint8_t SPCR;
+extern uint8_t SPIE;
+extern uint8_t SPE;
+extern uint8_t DORD;
+extern uint8_t MSTR;
+extern uint8_t CPOL;
+extern uint8_t CPHA;
+extern uint8_t SPR1;
+extern uint8_t SPR0;
+extern uint8_t SPSR;
+extern uint8_t SPIF;
+extern uint8_t WCOL;
+extern uint8_t SPI2X;
+extern uint8_t SPDR;
+extern uint8_t SS_DDR;
+extern uint8_t SS_PORT;
+extern uint8_t SS_BIT;
+extern uint8_t MOSI_DDR;
+extern uint8_t MOSI_BIT;
+extern uint8_t SCK_DDR;
+extern uint8_t SCK_BIT;
 
 void sei(void);
 
