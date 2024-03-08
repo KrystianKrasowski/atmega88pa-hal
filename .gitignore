@@ -48,3 +48,8 @@ flycheck_*.el
 
 # directory configuration
 .dir-locals.el
+
+# eclipse
+.cproject
+.project
+.settings
