@@ -34,10 +34,16 @@ void
 hal_gpio_init(const hal_gpio_def_t *def);
 
 void
+hal_gpio_init_mask(const hal_gpio_reg_t reg, const uint8_t mask);
+
+void
 hal_gpio_toggle(const hal_gpio_def_t *def);
 
 void
 hal_gpio_write(const hal_gpio_def_t *def, const hal_gpio_state_t state);
+
+void
+hal_gpio_write_mask(const hal_gpio_reg_t reg, const uint8_t mask);
 
 hal_gpio_state_t
 hal_gpio_read(const hal_gpio_def_t *def);

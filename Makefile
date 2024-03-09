@@ -1,21 +1,22 @@
-PATH_INC		= include
-PATH_SRC		= src
-PATH_TEST		= test
-PATH_BUILD		= build
+PATH_INC			= include
+PATH_SRC			= src
+PATH_TEST			= test
+PATH_BUILD			= build
 PATH_RELEASE_BUILD	= build/release
 PATH_RELEASE_OBJS	= build/release/objs
 PATH_TEST_BIN		= build/test/bin
 PATH_TEST_OBJS		= build/test/objs
 PATH_TEST_RESULTS	= build/test/results
-PATH_DIST		= dist
+PATH_DIST			= dist
 
 INCS = $(wildcard $(PATH_INC)/*.h)
 SRCS = $(wildcard $(PATH_SRC)/*.c)
 OBJS = $(patsubst $(PATH_SRC)/%.c, $(PATH_RELEASE_OBJS)/%.o, $(SRCS))
 LIBS = $(patsubst $(PATH_SRC)/%.c, $(PATH_DIST)/libavrhal-%.a, $(SRCS))
 
-TEST_SRCS	= $(wildcard $(PATH_TEST)/*.c)
+TEST_SRCS		= $(wildcard $(PATH_TEST)/*.c)
 TEST_RESULTS	= $(patsubst $(PATH_TEST)/%_test.c, $(PATH_TEST_RESULTS)/%_test.txt, $(TEST_SRCS))
+TEST_BINS		= $(patsubst $(PATH_TEST)/%_test.c, $(PATH_TEST_BIN)/%_test.out, $(TEST_SRCS)))
 
 # Release toolchain
 CC_RELEASE	= avr-gcc
@@ -80,4 +81,4 @@ install: $(LIBS)
 	@cp $(LIBS) /usr/local/lib
 
 .PHONY: all test clean install
-.PRECIOUS: $(PATH_TEST_BIN)/%.out $(PATH_TEST_RESULTS)/%.txt
+.PRECIOUS: $(TEST_BINS) $(TEST_RESULTS)
