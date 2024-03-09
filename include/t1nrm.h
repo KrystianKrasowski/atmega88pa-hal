@@ -1,16 +1,10 @@
-#ifndef _LIBAVRHAL_T1NRM
-#define _LIBAVRHAL_T1NRM
+#ifndef _LIBAVRHAL_T1NRM_H
+#define _LIBAVRHAL_T1NRM_H
 
-#include "std.h"
-#include <stdint.h>
+#include "version.h"
 
-void
-hal_t1nrm_run(hal_timer_prescaller_t presc);
-
-void
-hal_t1nrm_set(uint16_t value);
-
-void
-hal_t1nrm_stop(void);
+#if AVRHAL_VER_MAJOR == 1
+#include "v1/t1nrm.h"
+#endif
 
 #endif

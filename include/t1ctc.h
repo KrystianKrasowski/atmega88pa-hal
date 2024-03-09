@@ -1,23 +1,10 @@
-#ifndef _LIBAVRHAL_T1CTC
-#define _LIBAVRHAL_T1CTC
+#ifndef _LIBAVRHAL_T1CTC_H
+#define _LIBAVRHAL_T1CTC_H
 
-#include "std.h"
-#include <stdint.h>
+#include "version.h"
 
-typedef struct
-{
-    hal_timer_prescaller_t prescaller;
-    uint16_t               resolution;
-    uint16_t               output_compare_b;
-} hal_t1ctc_def_t;
-
-void
-hal_t1ctc_init(const hal_t1ctc_def_t *def);
-
-void
-hal_t1ctc_run(const hal_t1ctc_def_t *def);
-
-void
-hal_t1ctc_stop(void);
+#if AVRHAL_VER_MAJOR == 1
+#include "v1/t1ctc.h"
+#endif
 
 #endif
