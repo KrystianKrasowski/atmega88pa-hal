@@ -1,14 +1,10 @@
-#ifndef _LIBAVRHAL_STD
-#define _LIBAVRHAL_STD
+#ifndef _LIBAVRHAL_STD_H
+#define _LIBAVRHAL_STD_H
 
-typedef enum
-{
-    HAL_TIMER_PRESCALLER_NONE,
-    HAL_TIMER_PRESCALLER_1,
-    HAL_TIMER_PRESCALLER_8,
-    HAL_TIMER_PRESCALLER_64,
-    HAL_TIMER_PRESCALLER_256,
-    HAL_TIMER_PRESCALLER_1024,
-} hal_timer_prescaller_t;
+#include "version.h"
+
+#if AVRHAL_VER_MAJOR == 1
+#include "v1/std.h"
+#endif
 
 #endif

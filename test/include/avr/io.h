@@ -1,7 +1,7 @@
-#include <stdint.h>
-
 #ifndef _AVR_IO_MOCK
 #define _AVR_IO_MOCK
+
+#include <stdint.h>
 
 #define TIMER1_CAPT_vect __TIMER1_CAPT_vect
 #define SPI_STC_vect     __SPI_STC_vect
