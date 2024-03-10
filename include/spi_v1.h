@@ -55,6 +55,6 @@ void
 hal_spi_master_transmit(const uint8_t chr);
 
 __attribute__((weak)) void
-hal_spi_on_transfer_complete(const uint8_t chr);
+hal_spi_transfer_complete_isr(const uint8_t chr);
 
 #endif

@@ -21,15 +21,15 @@ void
 hal_t1int_configure(const hal_t1int_cfg_t *cfg);
 
 __attribute__((weak)) void
-hal_t1int_on_input_capture(const uint16_t value);
+hal_t1int_input_capture_isr(const uint16_t value);
 
 __attribute__((weak)) void
-hal_t1int_on_output_compare_a(void);
+hal_t1int_output_compare_a_isr(void);
 
 __attribute__((weak)) void
-hal_t1int_on_output_compare_b(void);
+hal_t1int_output_compare_b_isr(void);
 
 __attribute__((weak)) void
-hal_t1int_on_timer_overflow(void);
+hal_t1int_timer_overflow_isr(void);
 
 #endif

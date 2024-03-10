@@ -86,13 +86,12 @@ hal_spi_master_transmit(const uint8_t chr)
     SPDR = chr;
 }
 
-// TODO: should be renamed with _isr suffix
 __attribute__((weak)) void
-hal_spi_on_transfer_complete(const uint8_t chr)
+hal_spi_transfer_complete_isr(const uint8_t chr)
 {
 }
 
 ISR(SPI_STC_vect)
 {
-    hal_spi_on_transfer_complete(SPDR);
+    hal_spi_transfer_complete_isr(SPDR);
 }
