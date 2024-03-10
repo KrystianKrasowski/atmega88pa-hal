@@ -1,3 +1,10 @@
+#ifndef _LIBAVRHAL_GPIO_H
+#error "Includle <avrhal/gpio.h> instead of this file."
+#endif
+
+#ifndef _LIBAVRHAL_GPIO_VX_H
+#define _LIBAVRHAL_GPIO_VX_H 1
+
 #include <stdint.h>
 
 typedef enum
@@ -44,3 +51,5 @@ hal_gpio_write_mask(const hal_gpio_reg_t reg, const uint8_t mask);
 
 hal_gpio_state_t
 hal_gpio_read(const hal_gpio_def_t *def);
+
+#endif

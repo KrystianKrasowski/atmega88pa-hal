@@ -1,3 +1,11 @@
+#ifndef _LIBAVRHAL_T0PWM_H
+#error "Include <avrhal/t0pwm.h> instead of this file"
+#endif
+
+#ifndef _LIBAVRHAL_T0PWM_VX_H
+#define _LIBAVRHAL_T0PWM_VX_H 1
+#define AVRHAL_VER_MAJOR      1
+
 #include "std.h"
 #include <stdint.h>
 
@@ -37,3 +45,5 @@ hal_t0pwm_run(const hal_t0pwm_def_t *def);
 
 void
 hal_t0pwm_stop(void);
+
+#endif

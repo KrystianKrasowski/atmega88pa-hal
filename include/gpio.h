@@ -4,7 +4,7 @@
 #include "version.h"
 
 #if AVRHAL_VER_MAJOR == 1
-#include "v1/gpio.h"
+#include "gpio_v1.h"
 #endif
 
 #endif

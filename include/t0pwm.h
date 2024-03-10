@@ -4,7 +4,7 @@
 #include "version.h"
 
 #if AVRHAL_VER_MAJOR == 1
-#include "v1/t0pwm.h"
+#include "t0pwm_v1.h"
 #endif
 
 #endif

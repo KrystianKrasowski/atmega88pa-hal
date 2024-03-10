@@ -1,3 +1,10 @@
+#ifndef _AVRHAL_SPI_H
+#error "Include <avrhal/spi.h> instead of this file."
+#endif
+
+#ifndef _AVRHAL_SPI_VX_H
+#define _AVRHAL_SPI_VX_H 1
+
 #include <stdint.h>
 
 typedef enum
@@ -49,3 +56,5 @@ hal_spi_master_transmit(const uint8_t chr);
 
 __attribute__((weak)) void
 hal_spi_on_transfer_complete(const uint8_t chr);
+
+#endif

@@ -1,3 +1,10 @@
+#ifndef _LIBAVRHAL_T1INT_H
+#error "Include <avrhal/t1int.h> instead of this file."
+#endif
+
+#ifndef _LIBAVRHAL_T1INT_VX_H
+#define _LIBAVRHAL_T1INT_VX_H 1
+
 #include <stdint.h>
 
 typedef struct
@@ -24,3 +31,5 @@ hal_t1int_on_output_compare_b(void);
 
 __attribute__((weak)) void
 hal_t1int_on_timer_overflow(void);
+
+#endif

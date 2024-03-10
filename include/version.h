@@ -2,7 +2,8 @@
 #define AVRHAL_VERSION_H_
 
 #ifndef AVRHAL_VER_MAJOR
-#error Unspecified AVRHAL lib version number.
+#warning "Unspecified AVRHAL lib version number. Falling back to 1.x"
+#define AVRHAL_VER_MAJOR 1
 #endif
 
 #if AVRHAL_VER_MAJOR > 1

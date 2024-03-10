@@ -4,7 +4,7 @@
 #include "version.h"
 
 #if AVRHAL_VER_MAJOR == 1
-#include "v1/t1ctc.h"
+#include "t1ctc_v1.h"
 #endif
 
 #endif
