@@ -7,4 +7,4 @@ set(SOURCES
     t1nrm.c)
 
 add_library(avrhal STATIC ${SOURCES})
-target_include_directories(avrhal PUBLIC "${CMAKE_SOURCE_DIR}/include")
+target_include_directories(avrhal PUBLIC "${PROJECT_SOURCE_DIR}/include")
