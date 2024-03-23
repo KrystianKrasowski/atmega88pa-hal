@@ -1,9 +1,5 @@
 #ifndef _LIBAVRHAL_T1INT_H
-#error "Include <avrhal/t1int.h> instead of this file."
-#endif
-
-#ifndef _LIBAVRHAL_T1INT_VX_H
-#define _LIBAVRHAL_T1INT_VX_H 1
+#define _LIBAVRHAL_T1INT_H
 
 #include <stdint.h>
 

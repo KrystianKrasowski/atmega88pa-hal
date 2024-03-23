@@ -1,9 +1,5 @@
 #ifndef _LIBAVRHAL_GPIO_H
-#error "Includle <avrhal/gpio.h> instead of this file."
-#endif
-
-#ifndef _LIBAVRHAL_GPIO_VX_H
-#define _LIBAVRHAL_GPIO_VX_H 1
+#define _LIBAVRHAL_GPIO_H
 
 #include <stdint.h>
 

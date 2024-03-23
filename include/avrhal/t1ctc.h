@@ -1,9 +1,5 @@
 #ifndef _LIBAVRHAL_T1CTC_H
-#error "Include <avrhal/t1ctc.h> instead of this file."
-#endif
-
-#ifndef _LIBAVRHAL_T1CTC_VX_H
-#define _LIBAVRHAL_T1CTC_VS_H 1
+#define _LIBAVRHAL_T1CTC_H
 
 #include "std.h"
 #include <stdint.h>

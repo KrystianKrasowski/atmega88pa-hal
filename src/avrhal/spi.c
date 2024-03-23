@@ -1,4 +1,4 @@
-#include "spi.h"
+#include "avrhal/spi.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
 

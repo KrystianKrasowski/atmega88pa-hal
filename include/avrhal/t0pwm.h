@@ -1,10 +1,5 @@
 #ifndef _LIBAVRHAL_T0PWM_H
-#error "Include <avrhal/t0pwm.h> instead of this file"
-#endif
-
-#ifndef _LIBAVRHAL_T0PWM_VX_H
-#define _LIBAVRHAL_T0PWM_VX_H 1
-#define AVRHAL_VER_MAJOR      1
+#define _LIBAVRHAL_T0PWM_H
 
 #include "std.h"
 #include <stdint.h>

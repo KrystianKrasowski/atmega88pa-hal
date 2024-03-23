@@ -1,9 +1,5 @@
 #ifndef _LIBAVRHAL_STD_H
-#error "Include <avrhal/std.h> instead of this file."
-#endif
-
-#ifndef _LIB_AVRHAL_STD_VX_H
-#define _LIB_AVRHAL_STD_VX_H 1
+#define _LIBAVRHAL_STD_H
 
 typedef enum
 {

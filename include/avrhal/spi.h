@@ -1,9 +1,5 @@
 #ifndef _AVRHAL_SPI_H
-#error "Include <avrhal/spi.h> instead of this file."
-#endif
-
-#ifndef _AVRHAL_SPI_VX_H
-#define _AVRHAL_SPI_VX_H 1
+#define _AVRHAL_SPI_H
 
 #include <stdint.h>
 
