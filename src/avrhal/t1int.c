@@ -3,9 +3,9 @@
 #include <avr/io.h>
 
 void
-hal_t1int_configure(const hal_t1int_cfg_t *cfg)
+hal_t1int_init(const hal_t1int_t *t1int)
 {
-    TIMSK1 = *(uint8_t *)cfg;
+    TIMSK1 = *(uint8_t *)t1int;
     sei();
 }
 

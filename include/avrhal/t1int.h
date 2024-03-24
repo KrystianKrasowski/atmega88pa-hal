@@ -11,10 +11,10 @@ typedef struct
     uint8_t                  : 2;
     uint8_t input_capture    : 1;
     uint8_t                  : 2;
-} hal_t1int_cfg_t;
+} hal_t1int_t;
 
 void
-hal_t1int_configure(const hal_t1int_cfg_t *cfg);
+hal_t1int_init(const hal_t1int_t *t1int);
 
 __attribute__((weak)) void
 hal_t1int_input_capture_isr(const uint16_t value);
