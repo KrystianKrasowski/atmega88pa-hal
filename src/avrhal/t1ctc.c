@@ -2,18 +2,18 @@
 #include <avr/io.h>
 
 void
-hal_t1ctc_init(const hal_t1ctc_def_t *def)
+hal_t1ctc_init(const hal_t1ctc_t *t1ctc)
 {
     TCCR1A = 0;
     TCCR1B |= (1 << WGM12);
-    OCR1A = def->resolution;
-    OCR1B = def->output_compare_b;
+    OCR1A = t1ctc->resolution;
+    OCR1B = t1ctc->output_compare_b;
 }
 
 void
-hal_t1ctc_run(const hal_t1ctc_def_t *def)
+hal_t1ctc_run(const hal_t1ctc_t *t1ctc)
 {
-    switch (def->prescaller)
+    switch (t1ctc->prescaller)
     {
         case HAL_TIMER_PRESCALLER_1:
             TCCR1B &= ~((1 << CS12) | (1 << CS11));
