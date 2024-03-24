@@ -36,13 +36,13 @@ typedef struct
 {
     uint8_t                  interrupts;
     hal_spi_bit_order_t      order;
-    hal_spi_clock_polarity_t cpol;
-    hal_spi_clock_phase_t    cpha;
-    hal_spi_prescaller_t     presc;
-} hal_spi_def_t;
+    hal_spi_clock_polarity_t clock_polarity;
+    hal_spi_clock_phase_t    clock_phase;
+    hal_spi_prescaller_t     prescaller;
+} hal_spi_t;
 
 void
-hal_spi_master_init(const hal_spi_def_t *def);
+hal_spi_master_init(const hal_spi_t *spi);
 
 uint8_t
 hal_spi_master_transmit_receive(const uint8_t chr);

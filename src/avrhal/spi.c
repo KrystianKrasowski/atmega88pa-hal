@@ -3,7 +3,7 @@
 #include <avr/io.h>
 
 void
-hal_spi_master_init(const hal_spi_def_t *def)
+hal_spi_master_init(const hal_spi_t *spi)
 {
     // This is necessary to maintain uC in SPI master mode
     SS_PORT |= (1 << SS_BIT);
@@ -13,28 +13,28 @@ hal_spi_master_init(const hal_spi_def_t *def)
     // Enable SPI in master mode
     SPCR |= (1 << SPE) | (1 << MSTR);
 
-    if (def->interrupts)
+    if (spi->interrupts)
     {
         SPCR |= (1 << SPIE);
         sei();
     }
 
-    if (def->order == HAL_SPI_BIT_ORDER_LSB_FIRST)
+    if (spi->order == HAL_SPI_BIT_ORDER_LSB_FIRST)
     {
         SPCR |= (1 << DORD);
     }
 
-    if (def->cpol == HAL_SPI_CLOCK_POLARITY_FALLING_RISING)
+    if (spi->clock_polarity == HAL_SPI_CLOCK_POLARITY_FALLING_RISING)
     {
         SPCR |= (1 << CPOL);
     }
 
-    if (def->cpha == HAL_SPI_CLOCK_PHASE_SETUP_SAMPLE)
+    if (spi->clock_phase == HAL_SPI_CLOCK_PHASE_SETUP_SAMPLE)
     {
         SPCR |= (1 << CPHA);
     }
 
-    switch (def->presc)
+    switch (spi->prescaller)
     {
         case HAL_SPI_PRESCALLER_2:
             SPCR &= ~((1 << SPR1) | (1 << SPR0));
