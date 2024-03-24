@@ -1,0 +1,14 @@
+DOXYFILE_ENCODING   = UTF-8
+PROJECT_NAME        = "AVR Hardware Abstraction Layer"
+PROJECT_NUMBER      = 2.0.0
+OUTPUT_DIRECTORY    = ./
+OUTPUT_LANGUAGE     = ENGLISH
+MARKDOWN_SUPPORT    = YES
+
+EXTRACT_ALL         = YES
+RECURSIVE           = YES
+GENERATE_LATEX      = NO
+
+INPUT           = ../include/
+INPUT_ENCODING  = UTF-8
+FILE_PATTERNS   = *.h
