@@ -78,9 +78,9 @@ apply_prescaler(hal_timer_prescaller_t mode)
 }
 
 void
-hal_t0pwm_init(const hal_t0pwm_def_t *def)
+hal_t0pwm_init(const hal_t0pwm_t *t0pwm)
 {
-    switch (def->mode)
+    switch (t0pwm->mode)
     {
         case HAL_T0PWM_MODE_PHASE_CORRECT:
             TCCR0A |= (1 << WGM00);
@@ -95,13 +95,13 @@ hal_t0pwm_init(const hal_t0pwm_def_t *def)
 }
 
 void
-hal_t0pwm_run(const hal_t0pwm_def_t *def)
+hal_t0pwm_run(const hal_t0pwm_t *t0pwm)
 {
-    apply_com0nx(def->channel_a.mode, COM0A1, COM0A0);
-    apply_com0nx(def->channel_b.mode, COM0B1, COM0B0);
-    apply_prescaler(def->prescaller);
-    OCR0A = compute_ocrnx(def->channel_a.duty_cycle);
-    OCR0B = compute_ocrnx(def->channel_b.duty_cycle);
+    apply_com0nx(t0pwm->channel_a.mode, COM0A1, COM0A0);
+    apply_com0nx(t0pwm->channel_b.mode, COM0B1, COM0B0);
+    apply_prescaler(t0pwm->prescaller);
+    OCR0A = compute_ocrnx(t0pwm->channel_a.duty_cycle);
+    OCR0B = compute_ocrnx(t0pwm->channel_b.duty_cycle);
 }
 
 void

@@ -30,13 +30,13 @@ typedef struct
     hal_t0pwm_channel_def_t channel_a;
     hal_t0pwm_channel_def_t channel_b;
     hal_timer_prescaller_t  prescaller;
-} hal_t0pwm_def_t;
+} hal_t0pwm_t;
 
 void
-hal_t0pwm_init(const hal_t0pwm_def_t *def);
+hal_t0pwm_init(const hal_t0pwm_t *t0pwm);
 
 void
-hal_t0pwm_run(const hal_t0pwm_def_t *def);
+hal_t0pwm_run(const hal_t0pwm_t *t0pwm);
 
 void
 hal_t0pwm_stop(void);
