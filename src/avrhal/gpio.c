@@ -117,9 +117,9 @@ hal_gpio_write_mask(const hal_gpio_register_t gpio_register, const uint8_t mask)
 }
 
 hal_gpio_state_t
-hal_gpio_read(const hal_gpio_t *def)
+hal_gpio_read(const hal_gpio_t *gpio)
 {
-    if (*(PINx[def->pin]) & (1 << def->pin))
+    if (*(PINx[gpio->pin]) & (1 << PIN_MAP[gpio->pin]))
     {
         return HAL_GPIO_HIGH;
     }
