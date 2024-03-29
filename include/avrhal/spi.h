@@ -1,6 +1,7 @@
 #ifndef _AVRHAL_SPI_H
 #define _AVRHAL_SPI_H
 
+#include <stdbool.h>
 #include <stdint.h>
 
 typedef enum
@@ -34,7 +35,7 @@ typedef enum
 
 typedef struct
 {
-    uint8_t                  interrupts;
+    bool                     interrupts;
     hal_spi_bit_order_t      order;
     hal_spi_clock_polarity_t clock_polarity;
     hal_spi_clock_phase_t    clock_phase;
