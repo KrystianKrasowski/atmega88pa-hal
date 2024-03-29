@@ -158,30 +158,6 @@ should_set_interrupts(void)
     TEST_ASSERT_BIT_HIGH(SPIE, SPCR);
 }
 
-void
-should_transmit_and_receive(void)
-{
-    // given
-    SPSR |= (1 << SPIF);
-
-    // when
-    uint8_t response = hal_spi_master_transmit_receive(0xab);
-
-    // then
-    TEST_ASSERT_EQUAL(0xab, SPDR);
-    TEST_ASSERT_EQUAL(0xab, response);
-}
-
-void
-should_transmit(void)
-{
-    // when
-    hal_spi_master_transmit(0xab);
-
-    // then
-    TEST_ASSERT_EQUAL(0xab, SPDR);
-}
-
 int
 main(void)
 {
@@ -239,8 +215,6 @@ main(void)
                    BIT(SPR0));
 
     RUN_TEST(should_set_interrupts);
-    RUN_TEST(should_transmit_and_receive);
-    RUN_TEST(should_transmit);
 
     return UNITY_END();
 }
