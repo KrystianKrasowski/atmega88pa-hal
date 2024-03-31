@@ -14,3 +14,7 @@
         }                                                                      \
         UnityConcludeTest();                                                   \
     }
+
+#define TEST_ASSERT_BIT_STATE_MESSAGE(index, expected, actual, message)        \
+    TEST_ASSERT_EQUAL_MESSAGE(                                                 \
+        (expected >> index) & 1, (actual >> index) & 1, message)

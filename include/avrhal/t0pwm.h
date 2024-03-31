@@ -22,13 +22,13 @@ typedef struct
 {
     hal_t0pwm_channel_mode_t mode;
     uint8_t                  duty_cycle;
-} hal_t0pwm_channel_def_t;
+} hal_t0pwm_channel_t;
 
 typedef struct
 {
     hal_t0pwm_mode_t        mode;
-    hal_t0pwm_channel_def_t channel_a;
-    hal_t0pwm_channel_def_t channel_b;
+    hal_t0pwm_channel_t channel_a;
+    hal_t0pwm_channel_t channel_b;
     hal_timer_prescaller_t  prescaller;
 } hal_t0pwm_t;
 

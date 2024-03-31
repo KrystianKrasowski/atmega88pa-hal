@@ -133,16 +133,9 @@ should_set_clock(hal_spi_prescaller_t prescaller,
     hal_spi_master_init(&spi);
 
     // then
-    bool expected_spi2x = (spi2x >> SPI2X) & 1;
-    bool expected_spr1  = (spr1 >> SPR1) & 1;
-    bool expected_spr0  = (spr0 >> SPR0) & 1;
-    bool actual_spi2x   = (SPSR >> SPI2X) & 1;
-    bool actual_spr1    = (SPCR >> SPR1) & 1;
-    bool actual_spr0    = (SPCR >> SPR0) & 1;
-
-    TEST_ASSERT_EQUAL_MESSAGE(expected_spi2x, actual_spi2x, "Unexpected SPI2X");
-    TEST_ASSERT_EQUAL_MESSAGE(expected_spr1, actual_spr1, "Unexpected SPR1");
-    TEST_ASSERT_EQUAL_MESSAGE(expected_spr0, actual_spr0, "Unexpected SPR0");
+    TEST_ASSERT_BIT_STATE_MESSAGE(SPI2X, spi2x, SPSR, "Unexpected SPI2X");
+    TEST_ASSERT_BIT_STATE_MESSAGE(SPR1, spr1, SPCR, "Unexpected SPR1");
+    TEST_ASSERT_BIT_STATE_MESSAGE(SPR0, spr0, SPCR, "Unexpected SPR0");
 }
 
 void
