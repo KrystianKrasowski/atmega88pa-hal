@@ -1,11 +1,11 @@
-#include "avrhal/t1nrm.h"
+#include "avrhal/timer1.h"
 #include <avr/io.h>
 
 // TODO: Noise canceller for input capture
 // TODO: Input capture edge select
 
 void
-hal_t1nrm_run(hal_timer_prescaller_t presc)
+hal_timer1_run(hal_timer_prescaller_t presc)
 {
     switch (presc)
     {
@@ -31,18 +31,18 @@ hal_t1nrm_run(hal_timer_prescaller_t presc)
             break;
         case HAL_TIMER_PRESCALLER_NONE:
         default:
-            hal_t1nrm_stop();
+            hal_timer1_stop();
     }
 }
 
 void
-hal_t1nrm_set(uint16_t value)
+hal_timer1_set(uint16_t value)
 {
     TCNT1 = value;
 }
 
 void
-hal_t1nrm_stop(void)
+hal_timer1_stop(void)
 {
     TCCR1B &= ~((1 << CS12) | (1 << CS11) | (1 << CS10));
 }

@@ -1,5 +1,5 @@
 #include "avr/io.h"
-#include "avrhal/t1nrm.h"
+#include "avrhal/timer1.h"
 #include "helpers.h"
 #include "unity_config.h"
 #include <unity.h>
@@ -21,7 +21,7 @@ should_set_prescaller(hal_timer_prescaller_t prescaller,
                       uint8_t                cs10)
 {
     // when
-    hal_t1nrm_run(prescaller);
+    hal_timer1_run(prescaller);
 
     // then
     TEST_ASSERT_BIT_STATE_MESSAGE(CS12, cs12, TCCR1B, "Unexpected CS12");

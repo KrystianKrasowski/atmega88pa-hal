@@ -1,5 +1,5 @@
 set(TEST_SOURCES
-    hal_t1nrm_run.c
+    hal_timer1_run.c
 )
 
 foreach(TEST_SOURCE ${TEST_SOURCES})
