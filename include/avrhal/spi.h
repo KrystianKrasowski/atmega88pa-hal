@@ -1,6 +1,7 @@
 #ifndef _AVRHAL_SPI_H
 #define _AVRHAL_SPI_H
 
+#include <stdbool.h>
 #include <stdint.h>
 
 typedef enum
@@ -32,9 +33,9 @@ typedef enum
     HAL_SPI_PRESCALLER_128,
 } hal_spi_prescaller_t;
 
-typedef struct
+typedef union
 {
-    uint8_t                  interrupts;
+    bool                     interrupts;
     hal_spi_bit_order_t      order;
     hal_spi_clock_polarity_t clock_polarity;
     hal_spi_clock_phase_t    clock_phase;

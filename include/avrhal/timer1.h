@@ -5,12 +5,12 @@
 #include <stdint.h>
 
 void
-hal_t1nrm_run(hal_timer_prescaller_t presc);
+hal_timer1_run(hal_timer_prescaller_t presc);
 
 void
-hal_t1nrm_set(uint16_t value);
+hal_timer1_set(uint16_t value);
 
 void
-hal_t1nrm_stop(void);
+hal_timer1_stop(void);
 
 #endif

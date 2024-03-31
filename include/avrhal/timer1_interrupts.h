@@ -11,10 +11,10 @@ typedef struct
     uint8_t                  : 2;
     uint8_t input_capture    : 1;
     uint8_t                  : 2;
-} hal_t1int_t;
+} hal_timer1_interrupts_t;
 
 void
-hal_t1int_init(const hal_t1int_t *t1int);
+hal_timer1_interrupts_init(const hal_timer1_interrupts_t *interrupts);
 
 __attribute__((weak)) void
 hal_t1int_input_capture_isr(const uint16_t value);

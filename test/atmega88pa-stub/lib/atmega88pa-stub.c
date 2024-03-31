@@ -1,4 +1,5 @@
 #include "avr/io.h"
+#include "avr/stub.h"
 
 uint8_t  PINB   = 0;
 uint8_t  DDRB   = 0;
@@ -26,7 +27,22 @@ uint16_t OCR1A  = 0;
 uint16_t OCR1B  = 0;
 uint8_t  TIMSK1 = 0;
 
+static bool global_interrupts_enable = false;
+
 void
 sei()
 {
+    global_interrupts_enable = true;
+}
+
+void
+cli()
+{
+    global_interrupts_enable = false;
+}
+
+bool
+is_global_interrupts_enable(void)
+{
+    return global_interrupts_enable;
 }

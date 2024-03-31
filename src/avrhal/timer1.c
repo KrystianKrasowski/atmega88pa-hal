@@ -1,19 +1,13 @@
-#include "avrhal/t1ctc.h"
+#include "avrhal/timer1.h"
 #include <avr/io.h>
 
-void
-hal_t1ctc_init(const hal_t1ctc_t *t1ctc)
-{
-    TCCR1A = 0;
-    TCCR1B |= (1 << WGM12);
-    OCR1A = t1ctc->resolution;
-    OCR1B = t1ctc->output_compare_b;
-}
+// TODO: Noise canceller for input capture
+// TODO: Input capture edge select
 
 void
-hal_t1ctc_run(const hal_t1ctc_t *t1ctc)
+hal_timer1_run(hal_timer_prescaller_t prescaller)
 {
-    switch (t1ctc->prescaller)
+    switch (prescaller)
     {
         case HAL_TIMER_PRESCALLER_1:
             TCCR1B &= ~((1 << CS12) | (1 << CS11));
@@ -35,7 +29,20 @@ hal_t1ctc_run(const hal_t1ctc_t *t1ctc)
             TCCR1B &= ~(1 << CS11);
             TCCR1B |= (1 << CS12) | (1 << CS10);
             break;
+        case HAL_TIMER_PRESCALLER_NONE:
         default:
-            TCCR1B &= ~((1 << CS12) | (1 << CS11) | (1 << CS10));
+            hal_timer1_stop();
     }
+}
+
+void
+hal_timer1_set(uint16_t value)
+{
+    TCNT1 = value;
+}
+
+void
+hal_timer1_stop(void)
+{
+    TCCR1B &= ~((1 << CS12) | (1 << CS11) | (1 << CS10));
 }

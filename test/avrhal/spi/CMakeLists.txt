@@ -1,10 +1,6 @@
 set(TEST_SOURCES 
-    hal_gpio_init.c
-    hal_gpio_init_mask.c
-    hal_gpio_toggle.c
-    hal_gpio_write.c
-    hal_gpio_write_mask.c
-    hal_gpio_read.c
+    hal_spi_master_init.c
+    hal_spi_master_transmit.c
 )
 
 foreach(TEST_SOURCE ${TEST_SOURCES})

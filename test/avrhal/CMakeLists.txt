@@ -1,2 +1,8 @@
 target_link_libraries(avrhal PUBLIC atmega88pa-stub)
 add_subdirectory(gpio)
+add_subdirectory(spi)
+add_subdirectory(timer0)
+add_subdirectory(timer0_pwm)
+add_subdirectory(timer1)
+add_subdirectory(timer1_ctc)
+add_subdirectory(timer1_interrupts)
