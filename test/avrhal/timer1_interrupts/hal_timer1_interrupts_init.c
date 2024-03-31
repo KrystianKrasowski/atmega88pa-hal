@@ -1,10 +1,10 @@
-#include "avr/io.h"
 #include "avr/interrupt.h"
+#include "avr/io.h"
 #include "avr/stub.h"
-#include "avrhal/t1int.h"
+#include "avrhal/timer1_interrupts.h"
 #include <unity.h>
 
-hal_t1int_t interrupts = {
+hal_timer1_interrupts_t interrupts = {
     .input_capture    = 0,
     .output_compare_a = 0,
     .output_compare_b = 0,
@@ -29,7 +29,7 @@ should_set_input_capture_interrupt(void)
     interrupts.input_capture = 1;
 
     // when
-    hal_t1int_init(&interrupts);
+    hal_timer1_interrupts_init(&interrupts);
 
     // then
     TEST_ASSERT_BIT_HIGH(ICIE1, TIMSK1);
@@ -43,7 +43,7 @@ should_set_output_compare_a_interrupt(void)
     interrupts.output_compare_a = 1;
 
     // when
-    hal_t1int_init(&interrupts);
+    hal_timer1_interrupts_init(&interrupts);
 
     // then
     TEST_ASSERT_BIT_HIGH(OCIE1A, TIMSK1);
@@ -57,7 +57,7 @@ should_set_output_compare_b_interrupt(void)
     interrupts.output_compare_b = 1;
 
     // when
-    hal_t1int_init(&interrupts);
+    hal_timer1_interrupts_init(&interrupts);
 
     // then
     TEST_ASSERT_BIT_HIGH(OCIE1B, TIMSK1);
@@ -71,7 +71,7 @@ should_set_timer_overflow_interrupt(void)
     interrupts.timer_overflow = 1;
 
     // when
-    hal_t1int_init(&interrupts);
+    hal_timer1_interrupts_init(&interrupts);
 
     // then
     TEST_ASSERT_BIT_HIGH(TOIE1, TIMSK1);

@@ -1,11 +1,11 @@
-#include "avrhal/t1int.h"
+#include "avrhal/timer1_interrupts.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
 void
-hal_t1int_init(const hal_t1int_t *t1int)
+hal_timer1_interrupts_init(const hal_timer1_interrupts_t *interrupts)
 {
-    TIMSK1 = *(uint8_t *)t1int;
+    TIMSK1 = *(uint8_t *)interrupts;
     sei();
 }
 

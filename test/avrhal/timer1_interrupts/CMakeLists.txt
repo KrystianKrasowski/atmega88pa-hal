@@ -1,7 +1,5 @@
-set(TEST_SOURCES 
-    hal_t1ctc_init.c
-    hal_t1ctc_run.c
-    hal_t1ctc_stop.c
+set(TEST_SOURCES
+    hal_timer1_interrupts_init.c
 )
 
 foreach(TEST_SOURCE ${TEST_SOURCES})

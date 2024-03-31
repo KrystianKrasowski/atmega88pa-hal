@@ -1,9 +1,8 @@
 #include "avr/io.h"
-#include "avrhal/t1ctc.h"
+#include "avrhal/timer1_ctc.h"
 #include <unity.h>
 
-hal_t1ctc_t timer = {
-    .prescaller       = HAL_TIMER_PRESCALLER_1,
+hal_timer1_ctc_t timer = {
     .resolution       = 0,
     .output_compare_b = 0,
 };
@@ -26,7 +25,7 @@ void
 should_set_wgm(void)
 {
     // when
-    hal_t1ctc_init(&timer);
+    hal_timer1_ctc_init(&timer);
 
     // then
     TEST_ASSERT_BIT_HIGH(WGM12, TCCR1B);
@@ -39,7 +38,7 @@ should_set_resolution(void)
     timer.resolution = 0x7f;
 
     // when
-    hal_t1ctc_init(&timer);
+    hal_timer1_ctc_init(&timer);
 
     // then
     TEST_ASSERT_EQUAL(0x7f, OCR1A);
@@ -52,7 +51,7 @@ should_set_output_compare_for_b_channel(void)
     timer.output_compare_b = 0x7f;
 
     // when
-    hal_t1ctc_init(&timer);
+    hal_timer1_ctc_init(&timer);
 
     // then
     TEST_ASSERT_EQUAL(0x7f, OCR1B);

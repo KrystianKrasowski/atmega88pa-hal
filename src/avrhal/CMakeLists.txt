@@ -2,9 +2,9 @@ set(SOURCES
     gpio.c
     spi.c
     t0pwm.c
-    t1ctc.c
-    t1int.c
     timer1.c
+    timer1_ctc.c
+    timer1_interrupts.c
 )
 
 add_library(avrhal STATIC ${SOURCES})
