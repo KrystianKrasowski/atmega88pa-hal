@@ -5,9 +5,9 @@
 // TODO: Input capture edge select
 
 void
-hal_timer1_run(hal_timer_prescaller_t presc)
+hal_timer1_run(hal_timer_prescaller_t prescaller)
 {
-    switch (presc)
+    switch (prescaller)
     {
         case HAL_TIMER_PRESCALLER_1:
             TCCR1B &= ~((1 << CS12) | (1 << CS11));
