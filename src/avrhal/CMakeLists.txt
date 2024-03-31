@@ -1,8 +1,8 @@
 set(SOURCES
     gpio.c
     spi.c
-    t0pwm.c
     timer0.c
+    timer0_pwm.c
     timer1.c
     timer1_ctc.c
     timer1_interrupts.c
