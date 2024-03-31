@@ -1,4 +1,5 @@
 #include "avr/io.h"
+#include "avr/stub.h"
 #include "avrhal/spi.h"
 #include "helpers.h"
 #include "unity_config.h"
@@ -149,6 +150,7 @@ should_set_interrupts(void)
 
     // then
     TEST_ASSERT_BIT_HIGH(SPIE, SPCR);
+    TEST_ASSERT_TRUE(is_global_interrupts_enable());
 }
 
 int

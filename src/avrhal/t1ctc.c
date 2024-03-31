@@ -36,7 +36,7 @@ hal_t1ctc_run(const hal_t1ctc_t *t1ctc)
             TCCR1B |= (1 << CS12) | (1 << CS10);
             break;
         default:
-            TCCR1B &= ~((1 << CS12) | (1 << CS11) | (1 << CS10));
+            hal_t1ctc_stop();
     }
 }
 
