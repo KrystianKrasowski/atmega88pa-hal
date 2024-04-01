@@ -1,6 +1,7 @@
 #ifndef _LIBAVRHAL_TIMER0_PWM_H
 #define _LIBAVRHAL_TIMER0_PWM_H
 
+#include "avrhal/std.h"
 #include <stdint.h>
 
 typedef enum
@@ -28,9 +29,16 @@ typedef struct
     hal_timer0_pwm_mode_t    mode;
     hal_timer0_pwm_channel_t channel_a;
     hal_timer0_pwm_channel_t channel_b;
+    hal_timer_prescaller_t   prescaller;
 } hal_timer0_pwm_t;
 
 void
 hal_timer0_pwm_init(const hal_timer0_pwm_t *pwm);
+
+void
+hal_timer0_pwm_run(const hal_timer0_pwm_t *pwm);
+
+void
+hal_timer0_pwm_stop(const hal_timer0_pwm_t *pwm);
 
 #endif

@@ -1,3 +1,4 @@
+#include "avrhal/timer0.h"
 #include "avrhal/timer0_pwm.h"
 #include <avr/io.h>
 
@@ -63,9 +64,22 @@ hal_timer0_pwm_init(const hal_timer0_pwm_t *pwm)
             TCCR0B &= ~(1 << WGM02);
     }
 
-    apply_com0nx(pwm->channel_a.mode, COM0A1, COM0A0);
-    apply_com0nx(pwm->channel_b.mode, COM0B1, COM0B0);
-
     OCR0A = compute_ocrnx(pwm->channel_a.duty_cycle);
     OCR0B = compute_ocrnx(pwm->channel_b.duty_cycle);
+}
+
+void
+hal_timer0_pwm_run(const hal_timer0_pwm_t *pwm)
+{
+    apply_com0nx(pwm->channel_a.mode, COM0A1, COM0A0);
+    apply_com0nx(pwm->channel_b.mode, COM0B1, COM0B0);
+    hal_timer0_run(pwm->prescaller);
+}
+
+void
+hal_timer0_pwm_stop(const hal_timer0_pwm_t *pwm)
+{
+    hal_timer0_stop();
+    apply_com0nx(HAL_TIMER0_PWM_CHANNEL_DISCONNECTED, COM0A1, COM0A0);
+    apply_com0nx(HAL_TIMER0_PWM_CHANNEL_DISCONNECTED, COM0B1, COM0B0);
 }
