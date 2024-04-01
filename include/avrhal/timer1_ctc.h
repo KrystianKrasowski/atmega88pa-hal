@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-typedef struct
+typedef union
 {
     /**
      * @brief In CTC mode the timer counts up to OCR1A value
