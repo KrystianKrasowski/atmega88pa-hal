@@ -17,13 +17,13 @@ typedef enum
     HAL_TIMER0_PWM_CHANNEL_INVERTING
 } hal_timer0_pwm_channel_mode_t;
 
-typedef union
+typedef struct
 {
     hal_timer0_pwm_channel_mode_t mode;
     uint8_t                       duty_cycle;
 } hal_timer0_pwm_channel_t;
 
-typedef union
+typedef struct
 {
     hal_timer0_pwm_mode_t    mode;
     hal_timer0_pwm_channel_t channel_a;
