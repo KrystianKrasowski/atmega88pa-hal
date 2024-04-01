@@ -21,11 +21,8 @@ tearDown()
 void
 should_get_register(hal_gpio_pin_t pin, hal_gpio_register_t expected)
 {
-    // given
-    gpio.pin = pin;
-
     // when
-    hal_gpio_register_t actual = hal_gpio_get_register(&gpio);
+    hal_gpio_register_t actual = hal_gpio_get_register(pin);
 
     // then
     TEST_ASSERT_EQUAL(expected, actual);
