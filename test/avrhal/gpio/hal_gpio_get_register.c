@@ -48,6 +48,14 @@ main(void)
     RUN_PARAM_TEST(should_get_register, HAL_GPIO_PC4, HAL_GPIO_REGISTER_C);
     RUN_PARAM_TEST(should_get_register, HAL_GPIO_PC5, HAL_GPIO_REGISTER_C);
     RUN_PARAM_TEST(should_get_register, HAL_GPIO_PC6, HAL_GPIO_REGISTER_C);
+    RUN_PARAM_TEST(should_get_register, HAL_GPIO_PD0, HAL_GPIO_REGISTER_D);
+    RUN_PARAM_TEST(should_get_register, HAL_GPIO_PD1, HAL_GPIO_REGISTER_D);
+    RUN_PARAM_TEST(should_get_register, HAL_GPIO_PD2, HAL_GPIO_REGISTER_D);
+    RUN_PARAM_TEST(should_get_register, HAL_GPIO_PD3, HAL_GPIO_REGISTER_D);
+    RUN_PARAM_TEST(should_get_register, HAL_GPIO_PD4, HAL_GPIO_REGISTER_D);
+    RUN_PARAM_TEST(should_get_register, HAL_GPIO_PD5, HAL_GPIO_REGISTER_D);
+    RUN_PARAM_TEST(should_get_register, HAL_GPIO_PD6, HAL_GPIO_REGISTER_D);
+    RUN_PARAM_TEST(should_get_register, HAL_GPIO_PD7, HAL_GPIO_REGISTER_D);
 
     return UNITY_END();
 }

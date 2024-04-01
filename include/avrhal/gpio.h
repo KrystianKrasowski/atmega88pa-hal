@@ -112,4 +112,7 @@ hal_gpio_read(const hal_gpio_t *gpio);
 hal_gpio_register_t
 hal_gpio_get_register(const hal_gpio_pin_t pin);
 
+uint8_t
+hal_gpio_get_index(const hal_gpio_pin_t pin);
+
 #endif
