@@ -1,5 +1,6 @@
 set(TEST_SOURCES
-    hal_timer0_init_pwm.c
+    hal_timer0_pwm_init.c
+    hal_timer0_pwm_run.c
 )
 
 foreach(TEST_SOURCE ${TEST_SOURCES})

@@ -6,6 +6,7 @@ set(TEST_SOURCES
     hal_gpio_write_mask.c
     hal_gpio_read.c
     hal_gpio_get_register.c
+    hal_gpio_get_index.c
 )
 
 foreach(TEST_SOURCE ${TEST_SOURCES})

@@ -33,7 +33,7 @@ typedef enum
     HAL_SPI_PRESCALLER_128,
 } hal_spi_prescaller_t;
 
-typedef union
+typedef struct
 {
     bool                     interrupts;
     hal_spi_bit_order_t      order;
