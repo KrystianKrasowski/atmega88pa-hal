@@ -33,14 +33,17 @@ ISR(TIMER1_CAPT_vect)
 {
     hal_timer1_input_capture_isr(ICR1);
 }
+
 ISR(TIMER1_COMPA_vect)
 {
     hal_timer1_output_compare_a_isr();
 }
+
 ISR(TIMER1_COMPB_vect)
 {
     hal_timer1_output_compare_b_isr();
 }
+
 ISR(TIMER1_OVF_vect)
 {
     hal_timer1_timer_overflow_isr();
