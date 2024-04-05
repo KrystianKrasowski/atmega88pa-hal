@@ -65,11 +65,11 @@ typedef enum
 } hal_gpio_state_t;
 
 /**
- * @brief Sets given GPIO's DDRx register accorging to the specified direction
+ * @brief Sets given GPIO's DDRx register according to the specified direction.
  * 
  * Note that PORTx might be set as well, if INPUT_WITH_PULLUP direction is 
  * specified for the GPIO. This is an intermediate method - will not affect any 
- * register until hal_gpio_update is called
+ * register until hal_gpio_update is called.
  * 
  * @param[in] gpio 
  */
@@ -77,10 +77,10 @@ void
 hal_gpio_define(hal_gpio_t const *gpio);
 
 /**
- * @brief Sets given GPIO's PORTx register according to specified state
+ * @brief Sets given GPIO's PORTx register according to specified state.
  * 
  * This is an intermediate method - will not affect any register until 
- * hal_gpio_update is called
+ * hal_gpio_update is called.
  * 
  * @param[in] gpio 
  * @param[in] state 
@@ -89,10 +89,10 @@ void
 hal_gpio_set(hal_gpio_t const *gpio, hal_gpio_state_t const state);
 
 /**
- * @brief Toggles given GPIO's PORTx register
+ * @brief Toggles given GPIO's PORTx register.
  * 
  * This is an intermediate method - will not affect any register until 
- * hal_gpio_update is called
+ * hal_gpio_update is called.
  * 
  * @param[in] gpio 
  */
@@ -100,10 +100,10 @@ void
 hal_gpio_toggle(hal_gpio_t const *gpio);
 
 /**
- * @brief Updates all DDRx and PORTx registers
+ * @brief Updates all DDRx and PORTx registers.
  * 
  * This is termination method - all state changes provided with _define, _set
- * and _toggle methods would be applied to DDRx and PORTx registers
+ * and _toggle methods would be applied to DDRx and PORTx registers.
  * 
  * @param[in] gpio 
  */
@@ -111,7 +111,7 @@ void
 hal_gpio_update(void);
 
 /**
- * @brief Reads the state of the given GPIO's PINx register
+ * @brief Reads the state of the given GPIO's PINx register.
  * 
  * @param[in] gpio 
  * @return hal_gpio_state_t 
