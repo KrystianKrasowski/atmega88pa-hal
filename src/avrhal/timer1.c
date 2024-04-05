@@ -5,7 +5,7 @@
 // TODO: Input capture edge select
 
 void
-hal_timer1_run(hal_timer_prescaller_t prescaller)
+hal_timer1_run(hal_timer_prescaller_t const prescaller)
 {
     switch (prescaller)
     {
@@ -36,7 +36,7 @@ hal_timer1_run(hal_timer_prescaller_t prescaller)
 }
 
 void
-hal_timer1_set(uint16_t value)
+hal_timer1_set(uint16_t const value)
 {
     TCNT1 = value;
 }

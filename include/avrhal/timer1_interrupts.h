@@ -14,10 +14,10 @@ typedef struct
 } hal_timer1_interrupts_t;
 
 void
-hal_timer1_interrupts_init(const hal_timer1_interrupts_t *interrupts);
+hal_timer1_interrupts_init(hal_timer1_interrupts_t const *interrupts);
 
 __attribute__((weak)) void
-hal_timer1_input_capture_isr(const uint16_t value);
+hal_timer1_input_capture_isr(uint16_t const value);
 
 __attribute__((weak)) void
 hal_timer1_output_compare_a_isr(void);

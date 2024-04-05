@@ -2,7 +2,7 @@
 #include <avr/io.h>
 
 void
-hal_timer0_run(hal_timer_prescaller_t prescaller)
+hal_timer0_run(hal_timer_prescaller_t const prescaller)
 {
     switch (prescaller)
     {
@@ -33,7 +33,7 @@ hal_timer0_run(hal_timer_prescaller_t prescaller)
 }
 
 void
-hal_timer0_set(uint16_t value)
+hal_timer0_set(uint16_t const value)
 {
     TCNT0 = value;
 }
