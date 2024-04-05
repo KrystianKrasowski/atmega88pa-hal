@@ -23,7 +23,7 @@ tearDown(void)
 }
 
 void
-should_set_input_capture_interrupt(void)
+should_init_input_capture_interrupt(void)
 {
     // given
     interrupts.input_capture = 1;
@@ -37,7 +37,7 @@ should_set_input_capture_interrupt(void)
 }
 
 void
-should_set_output_compare_a_interrupt(void)
+should_init_output_compare_a_interrupt(void)
 {
     // given
     interrupts.output_compare_a = 1;
@@ -51,7 +51,7 @@ should_set_output_compare_a_interrupt(void)
 }
 
 void
-should_set_output_compare_b_interrupt(void)
+should_init_output_compare_b_interrupt(void)
 {
     // given
     interrupts.output_compare_b = 1;
@@ -65,7 +65,7 @@ should_set_output_compare_b_interrupt(void)
 }
 
 void
-should_set_timer_overflow_interrupt(void)
+should_init_timer_overflow_interrupt(void)
 {
     // given
     interrupts.timer_overflow = 1;
@@ -82,9 +82,9 @@ int
 main(void)
 {
     UNITY_BEGIN();
-    RUN_TEST(should_set_input_capture_interrupt);
-    RUN_TEST(should_set_output_compare_a_interrupt);
-    RUN_TEST(should_set_output_compare_b_interrupt);
-    RUN_TEST(should_set_timer_overflow_interrupt);
+    RUN_TEST(should_init_input_capture_interrupt);
+    RUN_TEST(should_init_output_compare_a_interrupt);
+    RUN_TEST(should_init_output_compare_b_interrupt);
+    RUN_TEST(should_init_timer_overflow_interrupt);
     return UNITY_END();
 }

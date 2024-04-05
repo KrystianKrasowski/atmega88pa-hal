@@ -1,8 +1,11 @@
-#ifndef _LIBAVRHAL_GPIO_H
-#define _LIBAVRHAL_GPIO_H
+#ifndef _AVRHAL_GPIOS_H
+#define _AVRHAL_GPIOS_H
 
-#include <stdint.h>
-
+/**
+ * @brief AVR pin representation
+ * 
+ * PXY - bit X of register Y, ex. PC4 is a 4 indexed bit of DDRC, PORTC or PINC 
+ */
 typedef enum
 {
     HAL_GPIO_PB0,
@@ -30,6 +33,12 @@ typedef enum
     HAL_GPIO_PD7,
 } hal_gpio_pin_t;
 
+/**
+ * @brief GPIO direction mode
+ * 
+ * Note that INPUT_WITH_PULLUP will set the PORTx bit to logical one. Simple
+ * INPUT might require to physically apply pull-up (down) resistor
+ */
 typedef enum
 {
     HAL_GPIO_INPUT,
@@ -37,82 +46,77 @@ typedef enum
     HAL_GPIO_OUTPUT
 } hal_gpio_direction_t;
 
-typedef enum
-{
-    HAL_GPIO_REGISTER_B,
-    HAL_GPIO_REGISTER_C,
-    HAL_GPIO_REGISTER_D
-} hal_gpio_register_t;
-
+/**
+ * @brief GPIO definition
+ */
 typedef struct
 {
     hal_gpio_pin_t       pin;
     hal_gpio_direction_t direction;
 } hal_gpio_t;
 
+/**
+ * @brief GPIO state
+ */
 typedef enum
 {
+    HAL_GPIO_LOW,
     HAL_GPIO_HIGH,
-    HAL_GPIO_LOW
 } hal_gpio_state_t;
 
 /**
- * @brief Initializes given GPIO definition
- *
- * @param[in] gpio A pioner to the GPIO definition
+ * @brief Sets given GPIO's DDRx register accorging to the specified direction
+ * 
+ * Note that PORTx might be set as well, if INPUT_WITH_PULLUP direction is 
+ * specified for the GPIO. This is an intermediate method - will not affect any 
+ * register until hal_gpio_update is called
+ * 
+ * @param[in] gpio 
  */
 void
-hal_gpio_init(const hal_gpio_t *gpio);
+hal_gpio_define(hal_gpio_t const *gpio);
 
 /**
- * @brief Initializes whole AVR GPIO register at once with a given mask
- *
- * @param[in] gpio_register AVR GPIO register
- * @param[in] mask 8-bit mask to write
+ * @brief Sets given GPIO's PORTx register according to specified state
+ * 
+ * This is an intermediate method - will not affect any register until 
+ * hal_gpio_update is called
+ * 
+ * @param[in] gpio 
+ * @param[in] state 
  */
 void
-hal_gpio_init_mask(const hal_gpio_register_t gpio_register, const uint8_t mask);
+hal_gpio_set(hal_gpio_t const *gpio, hal_gpio_state_t const state);
 
 /**
- * @brief Toggles the given GPIO state
- *
- * @param[in] gpio A pionter to the GPIO definition
+ * @brief Toggles given GPIO's PORTx register
+ * 
+ * This is an intermediate method - will not affect any register until 
+ * hal_gpio_update is called
+ * 
+ * @param[in] gpio 
  */
 void
-hal_gpio_toggle(const hal_gpio_t *gpio);
+hal_gpio_toggle(hal_gpio_t const *gpio);
 
 /**
- * @brief Writes new state to the given GPIO
- *
- * @param[in] gpio A pionter to the GPIO definition
- * @param[in] state A new state to be set on GPIO
+ * @brief Updates all DDRx and PORTx registers
+ * 
+ * This is termination method - all state changes provided with _define, _set
+ * and _toggle methods would be applied to DDRx and PORTx registers
+ * 
+ * @param[in] gpio 
  */
 void
-hal_gpio_write(const hal_gpio_t *gpio, const hal_gpio_state_t state);
+hal_gpio_update(void);
 
 /**
- * @brief Writes whole AVR GPIO register at onve with a given mask
- *
- * @param[in] gpio_register AVR GPIO register
- * @param[in] mask 8-bit mask to write
- */
-void
-hal_gpio_write_mask(const hal_gpio_register_t gpio_register,
-                    const uint8_t             mask);
-
-/**
- * @brief Reads the state of a given GPIO
- *
- * @param[in] gpio
- * @return hal_gpio_state_t
+ * @brief Reads the state of the given GPIO's PINx register
+ * 
+ * @param[in] gpio 
+ * @return hal_gpio_state_t 
  */
 hal_gpio_state_t
-hal_gpio_read(const hal_gpio_t *gpio);
-
-hal_gpio_register_t
-hal_gpio_get_register(const hal_gpio_pin_t pin);
-
-uint8_t
-hal_gpio_get_index(const hal_gpio_pin_t pin);
+hal_gpio_read(hal_gpio_t const *gpio);
 
 #endif
