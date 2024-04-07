@@ -86,8 +86,8 @@ should_run_channel_a_mode(hal_timer0_pwm_channel_mode_t mode,
     hal_timer0_pwm_run(&pwm);
 
     // then
-    TEST_ASSERT_BIT_STATE_MESSAGE(COM0A1, com0a1, TCCR0A, "Unexpectec COM0A1");
-    TEST_ASSERT_BIT_STATE_MESSAGE(COM0A0, com0a0, TCCR0A, "Unexpectec COM0A0");
+    TEST_ASSERT_BIT_STATE_MESSAGE(COM0A1, com0a1, TCCR0A, "Unexpected COM0A1");
+    TEST_ASSERT_BIT_STATE_MESSAGE(COM0A0, com0a0, TCCR0A, "Unexpected COM0A0");
 }
 
 void
@@ -102,8 +102,8 @@ should_run_channel_b_mode(hal_timer0_pwm_channel_mode_t mode,
     hal_timer0_pwm_run(&pwm);
 
     // then
-    TEST_ASSERT_BIT_STATE_MESSAGE(COM0B1, com0b1, TCCR0A, "Unexpectec COM0B1");
-    TEST_ASSERT_BIT_STATE_MESSAGE(COM0B0, com0b0, TCCR0A, "Unexpectec COM0B0");
+    TEST_ASSERT_BIT_STATE_MESSAGE(COM0B1, com0b1, TCCR0A, "Unexpected COM0B1");
+    TEST_ASSERT_BIT_STATE_MESSAGE(COM0B0, com0b0, TCCR0A, "Unexpected COM0B0");
 }
 
 int

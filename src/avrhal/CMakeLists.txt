@@ -6,6 +6,7 @@ set(SOURCES
     timer1.c
     timer1_ctc.c
     timer1_interrupts.c
+    timer1_pwm.c
 )
 
 add_library(avrhal STATIC ${SOURCES})
