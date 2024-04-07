@@ -1,14 +1,20 @@
 #include "avrhal/spi.h"
+#include "avrhal/gpio.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
+
+hal_gpio_t static slave_select = {HAL_GPIO_PB2, HAL_GPIO_INPUT_WITH_PULLUP};
+hal_gpio_t static mosi         = {HAL_GPIO_PB3, HAL_GPIO_OUTPUT};
+hal_gpio_t static sck          = {HAL_GPIO_PB5, HAL_GPIO_OUTPUT};
 
 void
 hal_spi_master_init(hal_spi_t const *spi)
 {
     // This is necessary to maintain uC in SPI master mode
-    SS_PORT |= (1 << SS_BIT);
-    MOSI_DDR |= (1 << MOSI_BIT);
-    SCK_DDR |= (1 << SCK_BIT);
+    hal_gpio_define(&slave_select);
+    hal_gpio_define(&mosi);
+    hal_gpio_define(&sck);
+    hal_gpio_update();
 
     // Enable SPI in master mode
     SPCR |= (1 << SPE) | (1 << MSTR);
