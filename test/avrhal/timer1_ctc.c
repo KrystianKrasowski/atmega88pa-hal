@@ -1,5 +1,5 @@
-#include "avr/io.h"
 #include "avrhal/timer1_ctc.h"
+#include "avr/io.h"
 #include <unity.h>
 
 hal_timer1_ctc_t timer = {
@@ -22,7 +22,7 @@ tearDown(void)
 }
 
 void
-should_set_wgm(void)
+should_init_wgm(void)
 {
     // when
     hal_timer1_ctc_init(&timer);
@@ -32,7 +32,7 @@ should_set_wgm(void)
 }
 
 void
-should_set_resolution(void)
+should_init_resolution(void)
 {
     // given
     timer.resolution = 0x7f;
@@ -45,7 +45,7 @@ should_set_resolution(void)
 }
 
 void
-should_set_output_compare_for_b_channel(void)
+should_init_output_compare_for_b_channel(void)
 {
     // given
     timer.output_compare_b = 0x7f;
@@ -61,8 +61,8 @@ int
 main(void)
 {
     UNITY_BEGIN();
-    RUN_TEST(should_set_wgm);
-    RUN_TEST(should_set_resolution);
-    RUN_TEST(should_set_output_compare_for_b_channel);
+    RUN_TEST(should_init_wgm);
+    RUN_TEST(should_init_resolution);
+    RUN_TEST(should_init_output_compare_for_b_channel);
     return UNITY_END();
 }

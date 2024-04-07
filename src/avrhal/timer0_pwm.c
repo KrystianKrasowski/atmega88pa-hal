@@ -1,5 +1,5 @@
-#include "avrhal/timer0.h"
 #include "avrhal/timer0_pwm.h"
+#include "avrhal/timer0.h"
 #include <avr/io.h>
 
 static uint8_t
@@ -14,9 +14,9 @@ compute_ocrnx(uint8_t duty_cycle)
 }
 
 static void
-apply_com0nx(hal_timer0_pwm_channel_mode_t channel_mode,
-             uint8_t                       com0n1_bit,
-             uint8_t                       com0n0_bit)
+apply_com0nx(hal_timer0_pwm_channel_mode_t const channel_mode,
+             uint8_t const                       com0n1_bit,
+             uint8_t const                       com0n0_bit)
 {
     switch (channel_mode)
     {
@@ -49,7 +49,7 @@ apply_com0nx(hal_timer0_pwm_channel_mode_t channel_mode,
 }
 
 void
-hal_timer0_pwm_init(const hal_timer0_pwm_t *pwm)
+hal_timer0_pwm_init(hal_timer0_pwm_t const *pwm)
 {
     switch (pwm->mode)
     {
@@ -69,7 +69,7 @@ hal_timer0_pwm_init(const hal_timer0_pwm_t *pwm)
 }
 
 void
-hal_timer0_pwm_run(const hal_timer0_pwm_t *pwm)
+hal_timer0_pwm_run(hal_timer0_pwm_t const *pwm)
 {
     apply_com0nx(pwm->channel_a.mode, COM0A1, COM0A0);
     apply_com0nx(pwm->channel_b.mode, COM0B1, COM0B0);
@@ -77,7 +77,7 @@ hal_timer0_pwm_run(const hal_timer0_pwm_t *pwm)
 }
 
 void
-hal_timer0_pwm_stop(const hal_timer0_pwm_t *pwm)
+hal_timer0_pwm_stop(hal_timer0_pwm_t const *pwm)
 {
     hal_timer0_stop();
     apply_com0nx(HAL_TIMER0_PWM_CHANNEL_DISCONNECTED, COM0A1, COM0A0);

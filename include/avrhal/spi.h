@@ -43,15 +43,15 @@ typedef struct
 } hal_spi_t;
 
 void
-hal_spi_master_init(const hal_spi_t *spi);
+hal_spi_master_init(hal_spi_t const *spi);
 
 uint8_t
-hal_spi_master_transmit_receive(const uint8_t chr);
+hal_spi_master_transmit_receive(uint8_t const chr);
 
 void
-hal_spi_master_transmit(const uint8_t chr);
+hal_spi_master_transmit(uint8_t const chr);
 
 __attribute__((weak)) void
-hal_spi_transfer_complete_isr(const uint8_t chr);
+hal_spi_transfer_complete_isr(uint8_t const chr);
 
 #endif

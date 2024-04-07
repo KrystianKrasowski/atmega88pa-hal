@@ -5,10 +5,10 @@
 #include <stdint.h>
 
 void
-hal_timer0_run(hal_timer_prescaller_t presc);
+hal_timer0_run(hal_timer_prescaller_t const presc);
 
 void
-hal_timer0_set(uint16_t value);
+hal_timer0_set(uint16_t const value);
 
 void
 hal_timer0_stop(void);

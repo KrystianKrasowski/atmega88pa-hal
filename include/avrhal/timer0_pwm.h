@@ -33,12 +33,12 @@ typedef struct
 } hal_timer0_pwm_t;
 
 void
-hal_timer0_pwm_init(const hal_timer0_pwm_t *pwm);
+hal_timer0_pwm_init(hal_timer0_pwm_t const *pwm);
 
 void
-hal_timer0_pwm_run(const hal_timer0_pwm_t *pwm);
+hal_timer0_pwm_run(hal_timer0_pwm_t const *pwm);
 
 void
-hal_timer0_pwm_stop(const hal_timer0_pwm_t *pwm);
+hal_timer0_pwm_stop(hal_timer0_pwm_t const *pwm);
 
 #endif

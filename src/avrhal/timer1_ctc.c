@@ -2,7 +2,7 @@
 #include <avr/io.h>
 
 void
-hal_timer1_ctc_init(const hal_timer1_ctc_t *timer)
+hal_timer1_ctc_init(hal_timer1_ctc_t const *timer)
 {
     TCCR1A = 0;
     TCCR1B |= (1 << WGM12);

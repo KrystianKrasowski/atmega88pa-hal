@@ -15,7 +15,7 @@ tearDown(void)
 }
 
 void
-should_set_prescaller(hal_timer_prescaller_t prescaller,
+should_run_prescaller(hal_timer_prescaller_t prescaller,
                       uint8_t                cs12,
                       uint8_t                cs11,
                       uint8_t                cs10)
@@ -34,31 +34,31 @@ main()
 {
     UNITY_BEGIN();
 
-    RUN_PARAM_TEST(should_set_prescaller,
+    RUN_PARAM_TEST(should_run_prescaller,
                    HAL_TIMER_PRESCALLER_1,
                    ~BIT(CS12),
                    ~BIT(CS11),
                    BIT(CS10));
 
-    RUN_PARAM_TEST(should_set_prescaller,
+    RUN_PARAM_TEST(should_run_prescaller,
                    HAL_TIMER_PRESCALLER_8,
                    ~BIT(CS12),
                    BIT(CS11),
                    ~BIT(CS10));
 
-    RUN_PARAM_TEST(should_set_prescaller,
+    RUN_PARAM_TEST(should_run_prescaller,
                    HAL_TIMER_PRESCALLER_64,
                    ~BIT(CS12),
                    BIT(CS11),
                    BIT(CS10));
 
-    RUN_PARAM_TEST(should_set_prescaller,
+    RUN_PARAM_TEST(should_run_prescaller,
                    HAL_TIMER_PRESCALLER_256,
                    BIT(CS12),
                    ~BIT(CS11),
                    ~BIT(CS10));
 
-    RUN_PARAM_TEST(should_set_prescaller,
+    RUN_PARAM_TEST(should_run_prescaller,
                    HAL_TIMER_PRESCALLER_1024,
                    BIT(CS12),
                    ~BIT(CS11),
