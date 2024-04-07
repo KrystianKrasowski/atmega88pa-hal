@@ -8,6 +8,7 @@ set(TEST_SOURCES
     timer1_ctc.c
     timer1_interrupts.c
     timer1.c
+    timer1_pwm.c
 )
 
 foreach(TEST_SOURCE ${TEST_SOURCES})
