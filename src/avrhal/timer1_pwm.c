@@ -2,6 +2,9 @@
 #include "avrhal/timer1.h"
 #include <avr/io.h>
 
+hal_gpio_t static oc1a = {HAL_GPIO_OC1A, HAL_GPIO_OUTPUT};
+hal_gpio_t static oc1b = {HAL_GPIO_OC1B, HAL_GPIO_OUTPUT};
+
 static uint8_t
 compute_ocrnx_8bit(uint8_t duty_cycle)
 {
@@ -11,6 +14,22 @@ compute_ocrnx_8bit(uint8_t duty_cycle)
     }
 
     return (255 * duty_cycle) / 100;
+}
+
+static void
+init_oc1x_pins_as_output_if_required(hal_timer1_pwm_t const *pwm)
+{
+    if (pwm->channel_a.mode != HAL_TIMER1_PWM_CHANNEL_DISCONNECTED)
+    {
+        hal_gpio_define(&oc1a);
+    }
+
+    if (pwm->channel_b.mode != HAL_TIMER1_PWM_CHANNEL_DISCONNECTED)
+    {
+        hal_gpio_define(&oc1b);
+    }
+
+    hal_gpio_update();
 }
 
 static void
@@ -51,26 +70,34 @@ apply_com1nx(hal_timer1_pwm_channel_mode_t const channel_mode,
 void
 hal_timer1_pwm_init(hal_timer1_pwm_t const *pwm)
 {
+    uint8_t tccr1a_mask = 0;
+    uint8_t tccr1b_mask = 0;
+    
     switch (pwm->mode)
     {
         case HAL_TIMER1_PWM_PHASE_CORRECT_8BIT:
-            TCCR1B &= ~(1 << WGM13);
-            TCCR1B &= ~(1 << WGM12);
-            TCCR1A &= ~(1 << WGM11);
-            TCCR1A |= (1 << WGM10);
+            tccr1b_mask &= ~(1 << WGM13);
+            tccr1b_mask &= ~(1 << WGM12);
+            tccr1a_mask &= ~(1 << WGM11);
+            tccr1a_mask |= (1 << WGM10);
             OCR1B = compute_ocrnx_8bit(pwm->channel_b.duty_cycle);
             OCR1A = compute_ocrnx_8bit(pwm->channel_a.duty_cycle);
             break;
         case HAL_TIMER1_PWM_FAST_8BIT:
         default:
-            TCCR1B &= ~(1 << WGM13);
-            TCCR1B |= (1 << WGM12);
-            TCCR1A &= ~(1 << WGM11);
-            TCCR1A |= (1 << WGM10);
+            tccr1b_mask &= ~(1 << WGM13);
+            tccr1b_mask |= (1 << WGM12);
+            tccr1a_mask &= ~(1 << WGM11);
+            tccr1a_mask |= (1 << WGM10);
             OCR1B = compute_ocrnx_8bit(pwm->channel_b.duty_cycle);
             OCR1A = compute_ocrnx_8bit(pwm->channel_a.duty_cycle);
             break;
     }
+
+    TCCR1A = tccr1a_mask;
+    TCCR1B = tccr1b_mask;
+    
+    init_oc1x_pins_as_output_if_required(pwm);
 }
 
 void

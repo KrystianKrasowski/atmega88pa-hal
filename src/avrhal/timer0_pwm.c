@@ -1,6 +1,10 @@
+#include "avrhal/gpio.h"
 #include "avrhal/timer0_pwm.h"
 #include "avrhal/timer0.h"
 #include <avr/io.h>
+
+hal_gpio_t static oc0a = {HAL_GPIO_OC0A, HAL_GPIO_OUTPUT};
+hal_gpio_t static oc0b = {HAL_GPIO_OC0B, HAL_GPIO_OUTPUT};
 
 static uint8_t
 compute_ocrnx(uint8_t duty_cycle)
@@ -11,6 +15,22 @@ compute_ocrnx(uint8_t duty_cycle)
     }
 
     return (255 * duty_cycle) / 100;
+}
+
+static void
+init_oc0x_pins_as_output_if_required(hal_timer0_pwm_t const *pwm)
+{
+    if (pwm->channel_a.mode != HAL_TIMER0_PWM_CHANNEL_DISCONNECTED)
+    {
+        hal_gpio_define(&oc0a);
+    }
+
+    if (pwm->channel_b.mode != HAL_TIMER0_PWM_CHANNEL_DISCONNECTED)
+    {
+        hal_gpio_define(&oc0b);
+    }
+
+    hal_gpio_update();
 }
 
 static void
@@ -51,21 +71,27 @@ apply_com0nx(hal_timer0_pwm_channel_mode_t const channel_mode,
 void
 hal_timer0_pwm_init(hal_timer0_pwm_t const *pwm)
 {
+    uint8_t tccr0a_mask = 0;
+    uint8_t tccr0b_mask = 0;
     switch (pwm->mode)
     {
         case HAL_TIMER0_PWM_PHASE_CORRECT:
-            TCCR0A |= (1 << WGM00);
-            TCCR0A &= ~(1 << WGM01);
-            TCCR0B &= ~(1 << WGM02);
+            tccr0a_mask |= (1 << WGM00);
+            tccr0a_mask &= ~(1 << WGM01);
+            tccr0b_mask &= ~(1 << WGM02);
             break;
         case HAL_TIMER0_PWM_FAST:
         default:
-            TCCR0A |= (1 << WGM01) | (1 << WGM00);
-            TCCR0B &= ~(1 << WGM02);
+            tccr0a_mask |= (1 << WGM01) | (1 << WGM00);
+            tccr0b_mask &= ~(1 << WGM02);
     }
 
+    TCCR0A = tccr0a_mask;
+    TCCR0B = tccr0b_mask;
     OCR0A = compute_ocrnx(pwm->channel_a.duty_cycle);
     OCR0B = compute_ocrnx(pwm->channel_b.duty_cycle);
+
+    init_oc0x_pins_as_output_if_required(pwm);
 }
 
 void

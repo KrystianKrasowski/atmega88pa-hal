@@ -3,6 +3,7 @@
 #include "helpers.h"
 #include "unity_config.h"
 #include <unity.h>
+#include <stdio.h>
 
 hal_timer1_pwm_t pwm = {
     .mode = HAL_TIMER1_PWM_FAST_8BIT,
@@ -29,6 +30,11 @@ setUp(void)
 void
 tearDown()
 {
+    hal_gpio_t oc1a = {HAL_GPIO_OC1A, HAL_GPIO_INPUT};
+    hal_gpio_t oc1b = {HAL_GPIO_OC1B, HAL_GPIO_INPUT};
+    hal_gpio_define(&oc1a);
+    hal_gpio_define(&oc1b);
+    hal_gpio_update();
 }
 
 void
@@ -81,6 +87,58 @@ should_init_channel_b_duty_cycle(hal_timer1_pwm_mode_t mode,
 
     // then
     TEST_ASSERT_EQUAL_HEX8(OCR1B, ocr1b);
+}
+
+void
+should_init_channel_a_output(hal_timer1_pwm_channel_mode_t mode)
+{
+    // given
+    pwm.channel_a.mode = mode;
+
+    // when
+    hal_timer1_pwm_init(&pwm);
+
+    // then
+    TEST_ASSERT_BIT_HIGH(OC1A_BIT, OC1A_DDR);
+}
+
+void
+should_not_init_channel_a_output(void)
+{
+    // given
+    pwm.channel_a.mode = HAL_TIMER1_PWM_CHANNEL_DISCONNECTED;
+
+    // when
+    hal_timer1_pwm_init(&pwm);  
+
+    // then
+    TEST_ASSERT_BIT_LOW(OC1A_BIT, OC1A_DDR);
+}
+
+void
+should_init_channel_b_output(hal_timer1_pwm_channel_mode_t mode)
+{
+    // given
+    pwm.channel_b.mode = mode;
+
+    // when
+    hal_timer1_pwm_init(&pwm);
+
+    // then
+    TEST_ASSERT_BIT_HIGH(OC1B_BIT, OC1B_DDR);
+}
+
+void
+should_not_init_channel_b_output(void)
+{
+    // given
+    pwm.channel_b.mode = HAL_TIMER1_PWM_CHANNEL_DISCONNECTED;
+
+    // when
+    hal_timer1_pwm_init(&pwm);
+
+    // then
+    TEST_ASSERT_BIT_LOW(OC1B_BIT, OC1B_DDR);
 }
 
 void
@@ -213,6 +271,28 @@ main(void)
                    HAL_TIMER1_PWM_PHASE_CORRECT_8BIT,
                    101,
                    0xff);
+
+    RUN_PARAM_TEST(should_init_channel_a_output,
+                   HAL_TIMER1_PWM_CHANNEL_TOGGLE_ON_COMPARE);
+
+    RUN_PARAM_TEST(should_init_channel_a_output,
+                   HAL_TIMER1_PWM_CHANNEL_NON_INVERTING);
+
+    RUN_PARAM_TEST(should_init_channel_a_output,
+                   HAL_TIMER1_PWM_CHANNEL_INVERTING);
+
+    RUN_TEST(should_not_init_channel_a_output);
+
+    RUN_PARAM_TEST(should_init_channel_b_output,
+                   HAL_TIMER1_PWM_CHANNEL_TOGGLE_ON_COMPARE);
+
+    RUN_PARAM_TEST(should_init_channel_b_output,
+                   HAL_TIMER1_PWM_CHANNEL_NON_INVERTING);
+
+    RUN_PARAM_TEST(should_init_channel_b_output,
+                   HAL_TIMER1_PWM_CHANNEL_INVERTING);
+
+    RUN_TEST(should_not_init_channel_b_output);
 
     RUN_PARAM_TEST(should_run_channel_a_mode,
                    HAL_TIMER1_PWM_CHANNEL_DISCONNECTED,

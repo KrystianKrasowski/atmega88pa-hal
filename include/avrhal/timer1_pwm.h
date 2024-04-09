@@ -2,7 +2,11 @@
 #define _LIBAVRHAL_TIMER1_PWM_H
 
 #include "avrhal/std.h"
+#include "avrhal/gpio.h"
 #include <stdint.h>
+
+#define HAL_GPIO_OC1A HAL_GPIO_PB1
+#define HAL_GPIO_OC1B HAL_GPIO_PB2
 
 typedef enum
 {

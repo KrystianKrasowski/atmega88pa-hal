@@ -147,6 +147,16 @@ extern uint8_t TCNT0;
 extern uint8_t OCR0A;
 extern uint8_t OCR0B;
 
+#define OC0A_DDR   DDRD
+#define OC0A_PORT  PORTD
+#define OC0A_PIN   PIND
+#define OC0A_BIT   6
+
+#define OC0B_DDR   DDRD
+#define OC0B_PORT  PORTD
+#define OC0B_PIN   PIND
+#define OC0B_BIT   5
+
 extern uint8_t TCCR1A;
 #define WGM10 0
 #define WGM11 1
@@ -178,5 +188,14 @@ extern uint8_t TIMSK1;
 #define OCIE1A 1
 #define OCIE1B 2
 #define ICIE1 5
+
+#define OC1A_DDR   DDRB
+#define OC1A_PORT  PORTB
+#define OC1A_PIN   PINB
+#define OC1A_BIT   1
+#define OC1B_DDR   DDRB
+#define OC1B_PORT  PORTB
+#define OC1B_PIN   PINB
+#define OC1B_BIT   2
 
 #endif
