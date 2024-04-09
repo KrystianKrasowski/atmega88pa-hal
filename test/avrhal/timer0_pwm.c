@@ -28,6 +28,11 @@ setUp(void)
 void
 tearDown()
 {
+    hal_gpio_t oc0a = {HAL_GPIO_OC0A, HAL_GPIO_INPUT};
+    hal_gpio_t oc0b = {HAL_GPIO_OC0B, HAL_GPIO_INPUT};
+    hal_gpio_define(&oc0a);
+    hal_gpio_define(&oc0b);
+    hal_gpio_update();
 }
 
 void
@@ -75,6 +80,57 @@ should_init_channel_b_duty_cycle(uint8_t duty_cycle, uint8_t ocr0b)
 }
 
 void
+should_init_channel_a_output(hal_timer0_pwm_channel_mode_t mode)
+{
+    // given
+    pwm.channel_a.mode = mode;
+
+    // when
+    hal_timer0_pwm_init(&pwm);
+
+    // then
+    TEST_ASSERT_BIT_HIGH(OC0A_BIT, OC0A_DDR);
+}
+
+void
+should_not_init_channel_a_output(void)
+{
+    // given
+    pwm.channel_a.mode = HAL_TIMER0_PWM_CHANNEL_DISCONNECTED;
+
+    // when
+    hal_timer0_pwm_init(&pwm);  
+
+    // then
+    TEST_ASSERT_BIT_LOW(OC0A_BIT, OC0A_DDR);
+}
+
+void
+should_init_channel_b_output(hal_timer0_pwm_channel_mode_t mode)
+{
+    // given
+    pwm.channel_b.mode = mode;
+
+    // when
+    hal_timer0_pwm_init(&pwm);
+
+    // then
+    TEST_ASSERT_BIT_HIGH(OC0B_BIT, OC0B_DDR);
+}
+
+void
+should_not_init_channel_b_output(void)
+{
+    // given
+    pwm.channel_b.mode = HAL_TIMER0_PWM_CHANNEL_DISCONNECTED;
+
+    // when
+    hal_timer0_pwm_init(&pwm);
+
+    // then
+    TEST_ASSERT_BIT_LOW(OC0B_BIT, OC0B_DDR);
+}
+void
 should_run_channel_a_mode(hal_timer0_pwm_channel_mode_t mode,
                           uint8_t                       com0a1,
                           uint8_t                       com0a0)
@@ -86,8 +142,8 @@ should_run_channel_a_mode(hal_timer0_pwm_channel_mode_t mode,
     hal_timer0_pwm_run(&pwm);
 
     // then
-    TEST_ASSERT_BIT_STATE_MESSAGE(COM0A1, com0a1, TCCR0A, "Unexpectec COM0A1");
-    TEST_ASSERT_BIT_STATE_MESSAGE(COM0A0, com0a0, TCCR0A, "Unexpectec COM0A0");
+    TEST_ASSERT_BIT_STATE_MESSAGE(COM0A1, com0a1, TCCR0A, "Unexpected COM0A1");
+    TEST_ASSERT_BIT_STATE_MESSAGE(COM0A0, com0a0, TCCR0A, "Unexpected COM0A0");
 }
 
 void
@@ -102,8 +158,8 @@ should_run_channel_b_mode(hal_timer0_pwm_channel_mode_t mode,
     hal_timer0_pwm_run(&pwm);
 
     // then
-    TEST_ASSERT_BIT_STATE_MESSAGE(COM0B1, com0b1, TCCR0A, "Unexpectec COM0B1");
-    TEST_ASSERT_BIT_STATE_MESSAGE(COM0B0, com0b0, TCCR0A, "Unexpectec COM0B0");
+    TEST_ASSERT_BIT_STATE_MESSAGE(COM0B1, com0b1, TCCR0A, "Unexpected COM0B1");
+    TEST_ASSERT_BIT_STATE_MESSAGE(COM0B0, com0b0, TCCR0A, "Unexpected COM0B0");
 }
 
 int
@@ -133,6 +189,26 @@ main(void)
     RUN_PARAM_TEST(should_init_channel_b_duty_cycle, 80, 0xcc);
     RUN_PARAM_TEST(should_init_channel_b_duty_cycle, 100, 0xff);
     RUN_PARAM_TEST(should_init_channel_b_duty_cycle, 101, 0xff);
+
+    RUN_PARAM_TEST(should_init_channel_a_output,
+                   HAL_TIMER0_PWM_CHANNEL_TOGGLE_ON_COMPARE);
+
+    RUN_PARAM_TEST(should_init_channel_a_output,
+                   HAL_TIMER0_PWM_CHANNEL_NON_INVERTING);
+
+    RUN_PARAM_TEST(should_init_channel_a_output,
+                   HAL_TIMER0_PWM_CHANNEL_INVERTING);
+
+    RUN_TEST(should_not_init_channel_a_output);
+
+    RUN_PARAM_TEST(should_init_channel_b_output,
+                   HAL_TIMER0_PWM_CHANNEL_TOGGLE_ON_COMPARE);
+
+    RUN_PARAM_TEST(should_init_channel_b_output,
+                   HAL_TIMER0_PWM_CHANNEL_NON_INVERTING);
+
+    RUN_PARAM_TEST(should_init_channel_b_output,
+                   HAL_TIMER0_PWM_CHANNEL_INVERTING);
 
     RUN_PARAM_TEST(should_run_channel_a_mode,
                    HAL_TIMER0_PWM_CHANNEL_DISCONNECTED,
