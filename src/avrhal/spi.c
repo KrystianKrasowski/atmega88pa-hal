@@ -1,7 +1,7 @@
-#include "avrhal/spi.h"
-#include "avrhal/gpio.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
+#include <avrhal/gpio.h>
+#include <avrhal/spi.h>
 
 hal_gpio_t static slave_select = {HAL_GPIO_PB2, HAL_GPIO_INPUT_WITH_PULLUP};
 hal_gpio_t static mosi         = {HAL_GPIO_PB3, HAL_GPIO_OUTPUT};

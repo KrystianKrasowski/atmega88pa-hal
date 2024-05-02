@@ -1,5 +1,5 @@
-#include "avrhal/timer1_ctc.h"
 #include <avr/io.h>
+#include <avrhal/timer1_ctc.h>
 
 void
 hal_timer1_ctc_init(hal_timer1_ctc_t const *timer)

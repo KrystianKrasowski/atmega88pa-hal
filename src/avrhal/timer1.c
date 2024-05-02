@@ -1,5 +1,5 @@
-#include "avrhal/timer1.h"
 #include <avr/io.h>
+#include <avrhal/timer1.h>
 
 // TODO: Noise canceller for input capture
 // TODO: Input capture edge select

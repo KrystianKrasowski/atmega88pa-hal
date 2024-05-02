@@ -1,7 +1,7 @@
-#include "avrhal/gpio.h"
-#include "avrhal/timer0_pwm.h"
-#include "avrhal/timer0.h"
 #include <avr/io.h>
+#include <avrhal/gpio.h>
+#include <avrhal/timer0.h>
+#include <avrhal/timer0_pwm.h>
 
 hal_gpio_t static oc0a = {HAL_GPIO_OC0A, HAL_GPIO_OUTPUT};
 hal_gpio_t static oc0b = {HAL_GPIO_OC0B, HAL_GPIO_OUTPUT};
@@ -88,8 +88,8 @@ hal_timer0_pwm_init(hal_timer0_pwm_t const *pwm)
 
     TCCR0A = tccr0a_mask;
     TCCR0B = tccr0b_mask;
-    OCR0A = compute_ocrnx(pwm->channel_a.duty_cycle);
-    OCR0B = compute_ocrnx(pwm->channel_b.duty_cycle);
+    OCR0A  = compute_ocrnx(pwm->channel_a.duty_cycle);
+    OCR0B  = compute_ocrnx(pwm->channel_b.duty_cycle);
 
     init_oc0x_pins_as_output_if_required(pwm);
 }

@@ -1,6 +1,6 @@
-#include "avrhal/timer1_interrupts.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
+#include <avrhal/timer1_interrupts.h>
 
 void
 hal_timer1_interrupts_init(hal_timer1_interrupts_t const *interrupts)

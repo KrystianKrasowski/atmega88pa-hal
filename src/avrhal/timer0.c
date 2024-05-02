@@ -1,5 +1,5 @@
-#include "avrhal/timer0.h"
 #include <avr/io.h>
+#include <avrhal/timer0.h>
 
 void
 hal_timer0_run(hal_timer_prescaller_t const prescaller)
