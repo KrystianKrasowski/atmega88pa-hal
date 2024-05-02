@@ -9,7 +9,7 @@ FetchContent_Declare(
 FetchContent_Declare(
     avrhal
     GIT_REPOSITORY https://github.com/KrystianKrasowski/avrhal.git
-    GIT_TAG release/3.2.0
+    GIT_TAG 3.2.0
 )
 
 FetchContent_MakeAvailable(unity)
