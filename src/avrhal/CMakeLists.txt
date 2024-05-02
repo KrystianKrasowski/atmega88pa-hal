@@ -9,5 +9,5 @@ set(SOURCES
     timer1_pwm.c
 )
 
-add_library(avrhal STATIC ${SOURCES})
-target_include_directories(avrhal PUBLIC "${PROJECT_SOURCE_DIR}/include")
+add_library(${PROJECT_NAME} STATIC ${SOURCES})
+target_link_libraries(${PROJECT_NAME} PUBLIC avrhal)

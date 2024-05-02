@@ -1,6 +1,6 @@
-#include "avrhal/timer1_pwm.h"
-#include "avrhal/timer1.h"
 #include <avr/io.h>
+#include <avrhal/timer1.h>
+#include <avrhal/timer1_pwm.h>
 
 hal_gpio_t static oc1a = {HAL_GPIO_OC1A, HAL_GPIO_OUTPUT};
 hal_gpio_t static oc1b = {HAL_GPIO_OC1B, HAL_GPIO_OUTPUT};
@@ -72,7 +72,7 @@ hal_timer1_pwm_init(hal_timer1_pwm_t const *pwm)
 {
     uint8_t tccr1a_mask = 0;
     uint8_t tccr1b_mask = 0;
-    
+
     switch (pwm->mode)
     {
         case HAL_TIMER1_PWM_PHASE_CORRECT_8BIT:
@@ -96,7 +96,7 @@ hal_timer1_pwm_init(hal_timer1_pwm_t const *pwm)
 
     TCCR1A = tccr1a_mask;
     TCCR1B = tccr1b_mask;
-    
+
     init_oc1x_pins_as_output_if_required(pwm);
 }
 

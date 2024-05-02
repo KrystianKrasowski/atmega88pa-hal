@@ -1,4 +1,4 @@
-#include "avrhal/gpio.h"
+#include <avrhal/gpio.h>
 #include <avr/io.h>
 
 #define DDRX_BUFFER(pin)  *(GPIO_MAP[pin].ddrx_buffer)

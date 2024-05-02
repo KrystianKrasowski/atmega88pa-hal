@@ -1,4 +1,5 @@
-target_link_libraries(avrhal PUBLIC atmega88pa-stub)
+target_link_libraries(${PROJECT_NAME} PUBLIC atmega88pa-stub)
+target_compile_definitions(${PROJECT_NAME} PUBLIC __AVR_ATmega88PA__)
 
 set(TEST_SOURCES
     gpio.c
@@ -16,7 +17,7 @@ foreach(TEST_SOURCE ${TEST_SOURCES})
     add_executable(${TEST_NAME} ${TEST_SOURCE})
 
     target_link_libraries(${TEST_NAME} 
-        PRIVATE avrhal unity)
+        PRIVATE ${PROJECT_NAME} unity)
 
     target_include_directories(${TEST_NAME} 
         PUBLIC ${PROJECT_SOURCE_DIR}/test/include)
